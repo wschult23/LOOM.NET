@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="0ada0922-f2d1-4714-a209-d7b2e610c8de" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>This section discusses the annotation relation and how LOOM.NET aspects can crosscut other entities.</para>
+    </summary>
+    <introduction>
+      <para>
+      One of the basic concepts in LOOM.NET is the annotation relation. Aspects in LOOM.NET can
+      be used as attributes and so aspects can annotate different kinds of targets. A target
+      can be a class, it's methods/properties/events, and the containing assembly.
+      </para>
+      <mediaLink>
+        <caption>Aspects and Targets</caption>
+        <image xlink:href="concerns-base" />
+      </mediaLink>
+      <para>
+        The figure above depicts two classes <legacyBold>C</legacyBold> and <legacyBold>D</legacyBold> with one and two members below. 
+        Both classes are contained in the assembly above. Beside these classes there is an aspect <legacyBold>E</legacyBold> that is also contained in 
+        a seperate assembly. The aspect has two
+        <legacyItalic>aspect members</legacyItalic>. A aspect member could be an <legacyItalic>advice</legacyItalic>, 
+        a <legacyItalic>introduction</legacyItalic> or a <legacyItalic>join-point variable</legacyItalic>.
+      </para>
+      <para>
+      	An advice is a piece of code that will be executed in the context of an existing method. A introduction
+      	on the other hand is something that will be added to the interface of the target entity. A join-point variable 
+      	can be both: It could either refer to an existing member variable or it can introduce a new member variable.
+      </para>
+    </introduction>
+    <section address="cover-component">
+      <title>Aspect Coverage of an Assembly</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Assemblies</caption>
+        <image xlink:href="cover-component" />
+      </mediaLink>
+        <para>
+        Given that <legacyBold>A</legacyBold> in the first figure is an advice ans <legacyBold>B</legacyBold> is an introduction, then in the 
+        figure above the annotation of the assembly with aspect <legacyBold>C</legacyBold> will cover all containing classes
+        and members. This means that the existing method of class <legacyBold>C</legacyBold> could be adviced by <legacyBold>A</legacyBold>. Furthermore
+        the class <legacyBold>C</legacyBold> could get a new method through the introduction <legacyBold>B</legacyBold>. The same happens
+        to class <legacyBold>D</legacyBold>.
+        </para>
+        <para>
+        The word "could" denotes that there are further conditions that have to be met. These conditions are described
+        in section <link xlink:href="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce"/>.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        [assembly: E]
+        </code>
+      </content>
+    </section>
+    <section address="cover-class">
+      <title>Aspect Coverage of a Class</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Classes</caption>
+        <image xlink:href="cover-class" />
+      </mediaLink>
+        <para>
+        If the aspect <legacyBold>E</legacyBold> annotates a class, then this class with its methods/properties will be covered 
+        by the aspect. In the figure above, given that <legacyBold>A</legacyBold> is an advice and <legacyBold>B</legacyBold> is
+        an introduction, all class methods could be adviced by <legacyBold>A</legacyBold> and <legacyBold>C</legacyBold> could
+        get a new method through the introduction <legacyBold>B</legacyBold>.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        [E]
+        public class D { }
+        </code>
+      </content>
+    </section>
+    <section address="cover-method">
+      <title>Aspect Coverage of a Method/Property</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Methods/Properties</caption>
+        <image xlink:href="cover-method" />
+      </mediaLink>
+        <para>
+        If the aspect <legacyBold>C</legacyBold> annotates a class member like a method or a property, then this member will be covered 
+        by the aspect. In the figure above, given that <legacyBold>A</legacyBold> is an advice and <legacyBold>B</legacyBold> is
+        an introduction, this member could be adviced by <legacyBold>A</legacyBold>.
+        </para>
+        <para>
+        Due to the fact that an introduction could not introduce something on the level of a single member,
+        the  introduction <legacyBold>B</legacyBold> would introduce a new method on class <legacyBold>C</legacyBold>.
+        In this case, the aspect method has to be declared as <codeInline>static</codeInline>.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        public class D 
+        { 
+        	[E]
+        	public virtual foo() { }
+        }
+        </code>
+      </content>
+    </section>
+    <section address="cover-derivedclass">
+      <title>Aspect Coverage of Base Classes</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Inheritance</caption>
+        <image xlink:href="cover-derivedclass" />
+      </mediaLink>
+        <para>
+        If the aspect annotates a class or an interface, then all derived classes or interfaces are also covered by this aspect. You can 
+        explicitly prevent that by setting the <codeEntityReference qualifyHint="true">M:System.AttributeUsage.Inherited</codeEntityReference>
+        to <codeInline>false</codeInline>.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        [E]
+        public class D { }
+        
+        public class C:D { }
+        </code>
+      </content>
+    </section>
+	<section address="cover-interfaceimplementation">
+      <title>Aspect Coverage of Interfaces</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Interfaces</caption>
+        <image xlink:href="cover-interfaceimplementation" />
+      </mediaLink>
+        <para>
+        If the aspect annotates an interface, then all interface implementations are also covered by the aspect.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        [E]
+        public interface D { }
+        
+        public class C:D { }
+        </code>
+      </content>
+    </section>
+	<section address="cover-methodimplementation">
+      <title>Aspect Coverage of Interface Member</title>
+      <content>
+      <mediaLink>
+        <caption>Aspects and Interfaces Member</caption>
+        <image xlink:href="cover-methodimplementation" />
+      </mediaLink>
+        <para>
+        If the aspect annotates an interface member, then the all interface member implementations are also covered by the aspect.
+        </para>
+        <para><legacyBold>Example</legacyBold></para>
+        <code language="c#">
+        public interface D 
+        {
+        	[E]
+        	void Foo()  { }
+        }
+        
+        public class C:D 
+        { 
+        	public void Foo() { }
+        }
+        </code>
+      </content>
+    </section>
+    <relatedTopics>
+       	<link xlink:href="0ada0922-f2d1-4714-a209-d7b2e610c8de"/>
+		<codeEntityReference>N:Loom</codeEntityReference>
+      	<codeEntityReference>T:Loom.AspectAttribute</codeEntityReference>
+		<codeEntityReference>T:Loom.JoinPoints.JPVariableAttribute</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

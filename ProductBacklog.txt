@@ -1,0 +1,7 @@
+Weaver.Aspects extension method -> AspectWeaver.Aspects
+revise matching process
+revide JoinPoint variables
+AspectWeaver.Create ans CreateInstance
+Move Loom.Runtime to Loom.dll
+Generics in Gripper Loom
+Inner Classes in Gripper Loom

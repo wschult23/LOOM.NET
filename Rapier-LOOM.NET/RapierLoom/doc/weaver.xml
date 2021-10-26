@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <create>
+    <summary>
+      Creates a typed interwoven instance using the constructor of <typeparamref name="T"/> that best matches the specified parameters.
+    </summary>
+    <typeparam name="T">The type of the target class</typeparam>
+    <returns>An instance of the newly created object with potentially interwoven aspects.</returns>
+    <example>
+      This example shows how to use the method to provide parameters for the constructors of the target classes:
+      <code>
+        public class TRACE1 : Aspect
+        {
+        ...
+        }
+
+        public class TRACE2 : Aspect
+        {
+        ...
+        }
+
+        public class A
+        {
+        private string _arg1;
+        private int _arg2;
+
+        // first constructor
+        public A() { }
+
+        // second construcor
+        public A(string arg1) { this._arg1 = arg1; }
+
+        // third constructor
+        public A(string arg1, int arg2) { this._arg1 = arg1; this._arg2 = arg2; }
+        }
+
+
+        // create an aspect array
+        Aspect[] aspects = new Aspect[2];
+        aspects[0] = new TRACE1();
+        aspects[1] = new TRACE2();
+
+        // uses the first construcor
+        A a1 = Weaver.Create&lt;A&gt;(aspects);
+        // uses the second construcor
+        A a2 = Weaver.Create&lt;A&gt;(aspects, "foo");
+        // uses the third constructor
+        A a3 = Weaver.Create&lt;A&gt;(aspects, "foo", 1);
+      </code>
+    </example>
+  </create>
+  <getclassfactory>
+    <summary>
+      Returns a factory object to create instances of <typeparamref name="T"/>.
+    </summary>
+    <typeparam name="T">The type of the target class.</typeparam>
+    <returns>The factory object to create instances of <typeparamref name="T"/>.</returns>
+    <example>
+      This example shows how to use the method to create interwoven objects
+      <code>
+        public class MyAspect : Aspect
+        {
+        ...
+        }
+
+        [MyAspect]
+        public class A
+        {
+        ...
+        }
+
+        ClassFactory&lt;A&gt; factory = Weaver.GetClassFactory&lt;A&gt;();
+        A[] a=new A[10]
+        for(int i=0; i&lt;a.Length;i++)
+        {
+          a[i]=factory.Create();
+        }
+      </code>
+    </example>
+  </getclassfactory>
+  <createinstance>
+    <summary>
+      Creates an interwoven instance of <paramref name="classtype"/> using the constructor that best matches the specified parameters. 
+    </summary>
+    <returns>An instance of the newly created object with potentially interwoven aspects.</returns>
+    <remarks>
+      <para>
+      You can also use the <see cref="O:Loom.Weaver.Create"/> method wich is normally more comfortable and targettype-safe. 
+      </para>
+    </remarks>
+    <example>
+      This example shows how to use the method to provide parameters for the target classes:
+      <code>
+        public class TRACE1 : Aspect
+        {
+        ...
+        }
+
+        public class TRACE2 : Aspect
+        {
+        ...
+        }
+
+        public class A
+        {
+        private string _arg1;
+        private int _arg2;
+
+        // first constructor
+        public A() { }
+
+        // second construcor
+        public A(string arg1) { this._arg1 = arg1; }
+
+        // third constructor
+        public A(string arg1, int arg2) { this._arg1 = arg1; this._arg2 = arg2; }
+        }
+
+
+        // create an aspect array
+        Aspect[] aspects = new Aspect[2];
+        aspects[0] = new TRACE1();
+        aspects[1] = new TRACE2();
+
+        object[] args1 = new object[];
+        // uses the first construcor
+        A a1 = (A)Weaver.CreateInstance(typeof(A), args1, aspects);
+
+        object[] args2 = new object[1];
+        args2[0] = "foo";
+        // uses the second construcor
+        A a2 = (A)Weaver.CreateInstance(typeof(A), args2, aspects);
+
+        object[] args3 = new object[2];
+        args3[0] = "foo";
+        args3[1] = 1;
+        // uses the third constructor
+        A a3 = (A)Weaver.CreateInstance(typeof(A), args3, aspects);
+      </code>
+    </example>
+  </createinstance>
+</doc>

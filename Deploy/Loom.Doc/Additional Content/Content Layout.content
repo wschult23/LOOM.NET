@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="f0286221-3ab3-4d76-a576-0c0d8e926f97" visible="True" noFile="true" isExpanded="true" title="LOOM.NET Documentation">
+    <Topic id="2a41fbaf-b070-4ee6-bcd0-4956ca4c0c93" visible="True" isDefault="true" isExpanded="true" title="Overview">
+      <Topic id="9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060" visible="True" title="Aspect Weaving">
+        <HelpKeywords>
+          <HelpKeyword index="K" term="weaving" />
+          <HelpKeyword index="K" term="weaver" />
+          <HelpKeyword index="K" term="aspect" />
+        </HelpKeywords>
+      </Topic>
+      <Topic id="0ada0922-f2d1-4714-a209-d7b2e610c8de" visible="True" title="Annotations and Aspect Coverage">
+        <HelpKeywords>
+          <HelpKeyword index="K" term="annotation" />
+          <HelpKeyword index="K" term="aspect coverage" />
+        </HelpKeywords>
+      </Topic>
+      <Topic id="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce" visible="True" title="Join-Points and Aspect Methods">
+        <HelpKeywords>
+          <HelpKeyword index="K" term="join-point" />
+          <HelpKeyword index="K" term="aspect method" />
+          <HelpKeyword index="K" term="join-point variable" />
+          <HelpKeyword index="K" term="aspect method attribute" />
+          <HelpKeyword index="K" term="pointcut" />
+          <HelpKeyword index="K" term="pointcut attribute" />
+          <HelpKeyword index="K" term="join-point parameter" />
+        </HelpKeywords>
+      </Topic>
+      <Topic id="c8e39583-fa48-47b6-bfe7-15d389543647" visible="True" title="Aspects and Aspect Instances">
+        <HelpKeywords>
+          <HelpKeyword index="K" term="aspect instances" />
+          <HelpKeyword index="K" term="aspect creation" />
+        </HelpKeywords>
+      </Topic>
+      <Topic id="f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33" visible="True" isSelected="true" title="Interweaving Order">
+        <HelpKeywords>
+          <HelpKeyword index="K" term="interweaving order" />
+        </HelpKeywords>
+      </Topic>
+      <Topic id="50f1c548-6bf6-4e57-a42e-fbae6a0e9894" visible="True" title="Interweaving Methods with Reference Parameters" />
+      <Topic id="08648ae0-4178-43bd-8039-e0a39263843d" visible="True" title="Interwoven Objects and Serialization" />
+      <Topic id="5fcacb48-4716-4cb6-9c58-6ca5af7afcb7" visible="True" title="Examples" />
+      <Topic id="32914007-1223-4b2b-95aa-61f49f2c6114" visible="True" title="Frequently Asked Questions" />
+      <Topic id="cc52ce6f-9fb8-420a-9baa-fe3254562cc9" visible="True" title="License" />
+    </Topic>
+    <Topic id="79d09d8d-6005-49d0-9320-b037008c1881" visible="True" apiParentMode="InsertAfter" title="Tutorial" />
+  </Topic>
+</Topics>

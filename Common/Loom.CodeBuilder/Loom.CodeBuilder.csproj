@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B152AB77-527F-4999-9B50-ACB1779C22B4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Loom.CodeBuilder</AssemblyName>
+    <AssemblyOriginatorKeyFile>MasterKey.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Loom</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug GL|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug GL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>..\..\bin\Loom.CodeBuilder.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DynamicProxy\CodeBricks\AspectCallCodeBrick.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\AspectInstantiationCodeBick.cs" />
+    <Compile Include="DynamicProxy\Declarations\GlobalAspectContainer.cs" />
+    <Compile Include="DynamicProxy\JoinPoints\ProxyAspectClass.cs" />
+    <Compile Include="DynamicProxy\JoinPoints\ProxyAspectCoverageInfo.cs" />
+    <Compile Include="DynamicProxy\JoinPoints\ProxyAspectCoverageInfoFactory.cs" />
+    <Compile Include="DynamicProxy\ProxyJoinPointCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicProxy\DataSlots\FieldAccessDataSlot.cs" />
+    <Compile Include="DynamicProxy\Declarations\AspectField.cs" />
+    <Compile Include="DynamicProxy\Declarations\ContextClass.cs" />
+    <Compile Include="DynamicProxy\Declarations\Declaration.cs" />
+    <Compile Include="DynamicProxy\Declarations\Delegates.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\AspectInfoImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicProxy\CodeBricks\BaseCodeBricks.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\CodeBrickBuilder.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\CodeBrick.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\ClassObjectImpl.cs" />
+    <Compile Include="DynamicProxy\CodeBricks\CommonMethodsImpl.cs" />
+    <Compile Include="DynamicProxy\Common.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicProxy\CodeBricks\ContextClassImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DynamicProxy\CodeBricks\DelegateCallImpl.cs" />
+    <Compile Include="DynamicProxy\DataSlots\AspectSlot.cs" />
+    <Compile Include="DynamicProxy\DataSlots\Context.cs" />
+    <Compile Include="DynamicProxy\Declarations\JPVariable.cs" />
+    <Compile Include="DynamicProxy\interfaces.cs" />
+    <Compile Include="DynamicProxy\Parameter\AspectParameterCodeBricks.cs" />
+    <Compile Include="DynamicProxy\DataSlots\Locals.cs" />
+    <Compile Include="DynamicProxy\Parameter\interfaces.cs" />
+    <Compile Include="DynamicProxy\Parameter\ParameterCodeBrick.cs" />
+    <Compile Include="DynamicProxy\Parameter\SimpleParameterCodeBricks.cs" />
+    <Compile Include="DynamicProxy\ProxyAdviceConstructorBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyAdviceMemberBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyAdviceMethodBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyConstructorBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyIntroducedMethodBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyJPInitializerBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyMemberBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxySealedAdviceConstructorBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyTypeActivatorBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyTypeBuilder.cs" />
+    <Compile Include="DynamicProxy\ProxyTypeBuilderBase.cs" />
+    <Compile Include="Runtime\CallContext.cs" />
+    <Compile Include="Runtime\ClassObject.cs" />
+    <Compile Include="Runtime\Common.cs" />
+    <Compile Include="Runtime\CreateContext.cs" />
+    <Compile Include="Runtime\Recall.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Strings.cs" />
+    <Compile Include="interfaces.cs" />
+    <Compile Include="Resources\CodeBuilderErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CodeBuilderErrors.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MasterKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CodeBuilderErrors.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CodeBuilderErrors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Loom.Common\Loom.Common.csproj">
+      <Project>{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}</Project>
+      <Name>Loom.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Loom.JoinPoints\Loom.JoinPoints.csproj">
+      <Project>{102F2533-4C6A-457E-AAE2-A4F273642765}</Project>
+      <Name>Loom.JoinPoints</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Loom\Loom.csproj">
+      <Project>{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}</Project>
+      <Name>Loom</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

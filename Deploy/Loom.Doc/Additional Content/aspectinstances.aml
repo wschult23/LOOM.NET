@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c8e39583-fa48-47b6-bfe7-15d389543647" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+      <para>
+        An aspect can have additional properties that control the runtime behaviour of an aspect. Given
+        the following example, we will discuss
+      </para>
+		<list class="bullet">
+		  <listItem><para>how aspects are created at runtime, and</para></listItem>
+		  <listItem><para>what virtual aspects are.</para></listItem>
+		</list>
+       <para>
+          <mediaLinkInline>
+            <image xlink:href="AspectInstantiation" />
+          </mediaLinkInline>
+       </para>
+       <para>
+       This example has two assemblies with several classes. There are several annotations that cover these 
+       classes (and its methods). Note that each annotation has a specific color. We will use this
+       color later on to depict where an aspect instance has its origin.
+        </para>
+        <para>
+       	The source code of the example is here:
+        </para>
+        <table>
+   		<row>
+        <entry>
+        <para>
+          <legacyBold>Assembly 2</legacyBold>
+        </para>
+        <code language="c#">
+        [MyAspect] // blue annotation
+        public class D
+        {
+        }
+        </code>
+        <para>
+          <legacyBold>MyAspect</legacyBold>
+        </para>
+        <code language="c#">
+		public class MyAspect
+		{
+			[Call(Advice.Before), IncludeAll] // JoinPoint, which indicates that this aspect is called before the target method
+			public void Trace()
+			{
+				Console.WriteLine("MyAspect called.");
+			}
+		}
+        </code>
+        </entry>
+		<entry>
+        <para>
+        <legacyBold>Assembly 1</legacyBold>
+        </para>
+        <code language="c#">
+          [assembly: MyAspect] // red annotation
+
+          [MyAspect] // green annotation
+          public class A
+          {
+          }
+
+          public class B: A
+          {
+	          [MyAspect] // orange annotation
+	          public virtual void Foo()
+	          {
+	          }
+
+	          [MyAspect] // purple annotation
+	          public virtual void Bar()
+	          {
+	          }
+          }
+
+          public class C: A
+          {
+          }
+        </code>
+        </entry>
+  		</row>
+		</table>
+    </introduction>
+    <section address="aspectcreation">
+      <title>Aspect Creation</title>
+      <content>
+        <para>
+        With the <codeEntityReference qualifyHint="false">T:Loom.AspectProperties.CreateAspectAttribute</codeEntityReference> attribute you can define 
+        on an aspect class when an instance of this class will be created. The <codeEntityReference qualifyHint="false">T:Loom.AspectProperties.CreateAspectAttribute</codeEntityReference>
+        will be applied to the aspect class:
+        </para>
+        <code language="c#">
+        [CreateAspect(Per.InstanceAndAnnotation)]
+        public class MyAspect
+        {
+        	...
+       	}
+        </code>
+        <para>
+        The following table shows, how many instances of an aspect
+        class will be created depending on the <codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>
+        parameter if we run the following piece of code:
+        </para>
+        <code language="c#">
+        var b1=new B(); // or Weaver.Create&lt;B&gt;();
+        var b2=new B(); // or Weaver.Create&lt;B&gt;();
+        var c=new C(); // or Weaver.Create&lt;C&gt;();
+        var d1=new C(); // or Weaver.Create&lt;D&gt;();
+        var d2=new C(); // or Weaver.Create&lt;D&gt;();
+        </code>
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Creation Type</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.InstanceAndAnnotation</para>
+    	<para>(Default)</para>
+    </entry>
+    <entry>
+    	<para>Each annotation creates a new instance of the annotating aspect whenever you create an instance of the target class. This is the default behavior.</para>
+      <para>
+        <mediaLinkInline>
+          <image xlink:href="PerInstanceAndAnnotation" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.Instance</para>
+    </entry>
+    <entry>
+    	<para>
+    	Each annotation creates exactly one instance of the annotating aspect that will be applied to each
+    	instance of covered target classes. Note that the method annotations share the same aspect instance.</para>
+      <para>
+        <mediaLinkInline>
+            <image xlink:href="PerInstance" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.ClassAndAnnotation</para>
+    </entry>
+    <entry>
+    	<para>Each annotation creates exactly one instance of the annotating aspect per target class that will be applied to each instance of covered target classes.</para>
+      <para>
+        <mediaLinkInline>
+            <image xlink:href="PerClassAndAnnotation" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.Class</para>
+    </entry>
+    <entry>
+    	<para>Each interwoven target class will have its own instance of an aspect 
+    	that will be applied when you create an instance of the target class. Note that the method annotations share the same aspect instance.</para>
+      <para>
+        <mediaLinkInline>
+            <image xlink:href="PerClass" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.Annotation</para>
+    </entry>
+    <entry>
+    	<para>Each annotation creates exactly one instance of the annotating aspect that will be applied to each instance of covered target classes.</para>
+      <para>
+        <mediaLinkInline>
+            <image xlink:href="PerAnnotation" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+  <row>
+    <entry>
+    	<para><codeEntityReference qualifyHint="false">T:Loom.AspectProperties.Per</codeEntityReference>.AspectClass</para>
+    </entry>
+    <entry>
+    	<para>There is only one instance of the aspect that will be applied to all instances of 
+    	interwoven target classes (the aspect is a singleton). This means that all annotations share the same instance.</para>
+      <para>
+    	<mediaLinkInline>
+            <image xlink:href="PerAspectClass" />
+        </mediaLinkInline>
+      </para>
+    </entry>
+  </row>
+</table>
+<para>
+The usage of <codeInline>Per.AspectClass</codeInline>, <codeInline>Per.Class</codeInline>
+and <codeInline>Per.Instance</codeInline> requires a parameterless aspect annotation. This means that
+you couldn't pass constructor parameters or named parameters to the aspect. The following code will generate an error in these cases:
+</para>
+ <code language="c#">
+ 	[CreateAspect(Per.AspectClass)] // or Per.Class or Per.Instance
+	public class MyAspect: AspectAttribute
+	{
+		public string NamedParameter { ... }
+		
+		public MyAspect(int i)
+		{
+			...
+		}
+	}
+	
+	[MyAspect(42, NamedParameter="foo")] // ERROR: parameters are not allowed
+	public class D
+	{
+		...
+	}
+	
+	...
+	
+	var d=new D();
+ </code>
+      </content>
+    </section>
+    <section>
+      <title>Runtime Behaviour of Interwoven Instances</title>
+      <content>
+        <para>
+        If the same aspect covers an join-point shadow (target class member) multible times, then the aspect will also be interwoven multiple times. As a consequence
+        the same advice will be called multiple times for each interwoven aspect instance if you use <codeInline>Per.Annotation</codeInline>, <codeInline>Per.ClassAndAnnotation</codeInline> or <codeInline>Per.InstanceAndAnnotation</codeInline>. 
+        Based on the example above you will get the following result if you create an instance of class B:
+        </para>
+        <code language="c#">
+        [CreateAspect(Per.Annotation)] // or Per.ClassAndAnnotation or Per.InstanceAndAnnotation
+		public class MyAspect
+		{
+		}
+		
+        ...
+        
+        var B=new B() // or Weaver.Create&lt;B&gt;();
+        b.Foo()
+        
+        /* The result will be:
+        
+        MyAspect called.
+        MyAspect called.
+        MyAspect called.
+        
+        */
+        </code>
+        <para>
+        Note that each advice will be executed on a dirfferent aspect instance regarding to the rules described above.
+        </para>
+        <para>
+        If you create the aspect with on of the following property, <codeInline>Per.AspectClass</codeInline>, <codeInline>Per.Class</codeInline> or <codeInline>Per.Class</codeInline>,
+        then there is only one instance and subsequently you will get the following result:
+        </para>
+        <code language="c#">
+		[CreateAspect(Per.AspectClass)] // or Per.Class or Per.Instance
+		public class MyAspect
+		{
+		}
+		
+        ...
+        
+        var B=new B() // or Weaver.Create&lt;B&gt;();
+        b.Foo()
+        
+        /* The result will be:
+        
+        MyAspect called.
+
+        */
+        </code>
+      </content>
+    </section>
+    <relatedTopics>
+      <codeEntityReference>N:Loom.AspectProperties</codeEntityReference>
+      <codeEntityReference>T:Loom.AspectProperties.CreateAspectAttribute</codeEntityReference>
+      <codeEntityReference>T:Loom.AspectProperties.Per</codeEntityReference>
+      <link xlink:href="f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33"/>
+
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

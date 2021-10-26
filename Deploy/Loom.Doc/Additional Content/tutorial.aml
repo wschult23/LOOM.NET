@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="79d09d8d-6005-49d0-9320-b037008c1881" revisionNumber="1">
+  <developerSDKTechnologyOverviewScenariosDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+      <!-- Uncomment this to generate an outline of the section and sub-section
+           titles.  Specify a numeric value as the inner text to limit it to
+           a specific number of sub-topics when creating the outline.  Specify
+           zero (0) to limit it to top-level sections only.  -->
+      <!-- <autoOutline /> -->
+      <para>The aim of this tutorial is to introduce in the usage of Rapier-LOOM.NET.
+		At first, a simple application will be implemented and a class which will be used by the application. After this, an example aspect will be defined and implemented. 
+	   </para>
+    </introduction>
+    <section address="tutexample">
+	  	<title>Tutorial Example</title>
+	  	<content>
+	  	<para>
+	  	The simple example is a .Net Console Application. The application greets the user with its name.
+	  	</para>
+	  	<para>
+		At first, the application asks the user for his or her name and reads the name from the console. After this, the application instantiates a new object of type <codeInline>Base</codeInline>. As next, the <codeInline>Hello()</codeInline> method of the object is called with the read name. 
+		</para>
+        <para>
+          <legacyBold>The Application:</legacyBold>
+        </para>
+        <code language="c#">
+using System;
+
+namespace Tutorial
+{
+  public class Test
+  {
+    [STAThread]
+    static void Main(string[] args)
+    {
+      string name;
+
+      Console.Write("Your name: ");
+      name = Console.ReadLine();
+      Base b = new Base();
+      b.Hello(name);
+      Console.ReadLine();
+    }
+  }
+}
+</code>
+			<para>The <codeInline>Base</codeInline> class implements only a <codeInline>Hello()</codeInline> method, which displays a string with the read name on the console. If you do not call the Base class throgh an interface, you have to declare the target methods which should become interwoven as <legacyBold>virtual</legacyBold>. 
+			</para>
+        <para>
+          <legacyBold>The Base Class:</legacyBold>
+        </para>
+        <code language="c#">
+using System;
+
+namespace Tutorial
+{
+  public class Base
+  {
+    public virtual void Hello(string name)
+    {
+      Console.WriteLine("Hello " + name + "!");
+    }
+  }
+}
+</code>
+<para>The result is displayed on the console: </para>
+<para><codeInline>Your name: world</codeInline></para>
+<para><codeInline>Hello world! </codeInline></para>
+	  	</content>
+	</section>
+	<section address="tutaspect">
+	  	<title>The Aspect</title>
+	  	<content>
+	  	<para>
+	  	All aspect classes which become interwoven have to be derived from <codeEntityReference qualifyHint="true">T:Loom.Aspect</codeEntityReference> or <codeEntityReference qualifyHint="true">T:Loom.AspectAttribute</codeEntityReference>.
+	  	</para>
+	  	<para>
+		An aspect class contains aspect methods, in which the aspect code is implemented. An aspect attribute marks a method inside an aspect class as an aspect method. 
+		It defines how an aspect method will become interwoven with a target class method, using <codeEntityReference qualifyHint="true">T:Loom.JoinPoints.Advice</codeEntityReference>.
+	  	</para>
+	  	<para>
+		Additional pointcut attributes define, which method in the target class will become interwoven and which won't become interwoven with the aspect methods.
+		The aspect methods will become interwoven with a target method, if they fulfill the <link xlink:href="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce">Rules for Interweaving</link>. 
+	  	</para>
+	  	<para>
+		The example aspect implements tracing and is named TraceAspect. TraceAspect is derived from <codeEntityReference qualifyHint="true">T:Loom.Aspect</codeEntityReference>. 
+		The aspect method attribute <codeEntityReference qualifyHint="true">T:Loom.JoinPoints.CallAttribute</codeEntityReference> interweaves the aspect method in a call of a target class method. In <codeInline>TraceAspect</codeInline> the aspect method <codeInline>Trace()</codeInline> will become
+		interwoven around the <codeInline>Base.Hello()</codeInline> method. Which means, that the target method can be called from inside the aspect. To do that, the aspect context must be declared explicitly in the aspect method parameter list using 
+		<codeEntityReference qualifyHint="true">T:Loom.JoinPoints.JPContextAttribute</codeEntityReference> attribute.
+		</para>
+		<para>
+		The pointcut attribute <codeEntityReference qualifyHint="true">T:Loom.JoinPoints.IncludeAllAttribute</codeEntityReference> defines, that all methods including the <codeInline>Hello()</codeInline> method of the Base class will become interwoven:
+		</para>
+		<para>
+		Inside the <codeInline>Trace()</codeInline> method the actual state of the program execution is displayed on the console. 
+		</para>
+		<para>
+		The interwoven target class method <codeInline>Hello()</codeInline> is called out of the aspect method <codeInline>Trace()</codeInline> via <codeEntityReference qualifyHint="true">M:Loom.JoinPoints.Context.Invoke(System.Object[])</codeEntityReference>. 
+	  	</para>
+      <para><legacyBold>The Aspect:</legacyBold></para>
+<code language="c#">
+using System;
+using Loom;
+using Loom.JoinPoints;
+
+namespace Tutorial
+{
+  public class TraceAspect : Loom.Aspect
+  {
+    [Loom.JoinPoints.IncludeAll]
+    [Loom.Call(Advice.Around)]
+    public T Trace&lt;T&gt;([JPContext]Context ctx, params object[] args)
+    {
+      Console.WriteLine("{0}.{1} called",ctx.TargetClass, ctx.CurrentMethod.Name);
+      return (T)ctx.Invoke(args);
+    }
+  }
+}
+</code>
+	  	</content>
+	</section>
+	<section address="tutinterweaving">
+	  	<title>Interweaving of Aspect and Target Class</title>
+	  	<content>
+        <para>
+          The dynamic aspect weaver Rapier-LOOM.NET interweaves one or more aspect classes with a .Net target class on instantiation of the target class. Therefore the target class methods have to be either virtual or have to be defined via an interface. The method of the class Base is defined as virtual in this tutorial example.
+          For interweaving the TraceAspect have to be instantiated (<codeInline>new TraceAspect()</codeInline>).
+        </para>
+        <para>
+          Because Rapier-LOOM.NET interweaves aspect and target class at instantiation of the target class, the target class need to be instantiated via the  <codeEntityReference qualifyHint="true">Overload:Loom.Weaver.Create``1</codeEntityReference> factory method instead of the new-operator. You can additionally pass possible constructor parameters and aspect objects. 
+        </para>
+        <para>
+          <legacyBold>The Application Extended with the Aspect:</legacyBold>
+        </para>
+        <code language="c#">
+using System;
+using Loom;
+using Loom.JoinPoints;
+
+namespace Tutorial
+{
+  public class Test
+  {
+    [STAThread]
+    static void Main(string[] args)
+    {
+      Console.Write("Your name: ");
+      name = Console.ReadLine();
+      TraceAspect ta = new TraceAspect();
+      Base b = Loom.Weaver.Create&lt;Base&gt;(ta);
+      B.Hello(name);
+      Console.ReadLine();
+    }
+  }
+}
+
+        </code>
+        <para>The result is the following: </para>
+        <para>
+          <codeInline>Your name: world</codeInline>
+        </para>
+        <para>
+          <codeInline>
+            Base.Hello called
+          </codeInline>
+        </para>
+        <para>
+          <codeInline>Hello world! </codeInline>
+        </para>
+
+      </content>
+	</section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerSDKTechnologyOverviewScenariosDocument>
+</topic>

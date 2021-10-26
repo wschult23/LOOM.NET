@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>This section describes in wich order interwoven methods are called. </para>
+    </summary>
+    <introduction>
+      <para>
+      There are two levels on which the order becomes relevant: the aspect method level within the same aspect class,
+      and the aspect class level.
+      </para>
+    </introduction>
+    <!-- Add one or more top-level section elements.  These are collapsible.
+         If using <autoOutline />, add an address attribute to identify it
+         and specify a title so that it can be jumped to with a hyperlink. -->
+    <section address="interweaveoneaspect">
+      <title>Interweaving Order with one Aspect</title>
+      <content>
+        <para>If there is more than one aspect method of the same weaving category, which should be interwoven with a single target method, then the aspect methods will be interwoven in the same order as they are defined in the aspect class.</para>
+        <para>The interwoven method is defined as follows:</para>
+		
+	  <para>
+        <legacyItalic>
+          call all aspect methods with <codeInline>Advice.Before</codeInline> in the same order as they are defined in the aspect class
+        </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>
+          either call the aspect method with <codeInline>Advice.Around</codeInline>* or the target method
+        </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>
+          call all aspect methods with <codeInline>Advice.AfterReturning</codeInline> in the same order as they are defined in the aspect class
+        </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>in case of an exception thrown by any method executed so far: </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>
+          call all aspect methods with <codeInline>Advice.AfterThrowing</codeInline> in the same order as they are defined in the aspect class
+        </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>and finally: </legacyItalic>
+      </para>
+			<para>
+        <legacyItalic>
+          call all aspect methods with <codeInline>Advice.After</codeInline> in the same order as they are defined in the aspect class.
+        </legacyItalic>
+      </para>
+		<para>* more than one aspect method with <codeInline>Advice.Around</codeInline> causes an error</para>
+      </content>
+    </section>
+    <section address="interweaveoneaspectex">
+      <title>Example</title>
+      <content>
+      	
+<code language="c#">
+public class MyAspect:Aspect  
+{    
+	[Call(Advice.Before), IncludeAll]    
+	public void f1() { ... }    
+	[Call(Advice.Before), IncludeAll]    
+	public void f2() { ... }    
+	[Call(Advice.Around), IncludeAll]    
+	public T f3&lt;T&gt;([JPContext] Context context) 
+	{ ... context.Invoke(...) ... }    
+	[Call(Advice.AfterReturning), IncludeAll]    
+	public void f4a() { ... }    
+	[Call(Advice.AfterThrowing), IncludeAll]    
+	public T f4b&lt;T&gt;() { ... }    
+	[Call(Advice.After), IncludeAll]    
+	public void f5() {}  }
+</code>
+<para>After interweaving all methods with a target method foo, the interwoven method will look like the following:</para>
+
+<code language="scr">
+int foo()   
+{       
+	try       
+	{           
+		f1();            
+		f2();           
+		f3();  // calls the original foo()           
+		f4a();       
+	}       
+	catch(Exception)       
+	{           
+		f4b();       
+	}      
+	finally      
+	{          
+		f5();       
+	}  
+}
+</code>
+
+      </content>
+    </section>
+    <section address="interweavemoreaspect">
+      <title>Interweaving Order with more than one Aspect</title>
+      <content>
+        <para>
+          If you have more than one aspect class applied to a target class Loom interweaves the aspects in the following order:
+        </para>
+          <list class="ordered">
+            <listItem>
+              <para>first, all aspects defined as assembly attribute in the target class's assembly or an assembly of the target class type's hierarchy in the same order as they are defined in the metadata, then</para>
+            </listItem>
+            <listItem>
+              <para>all aspects defined as module attribute in the target class's module or an module of the target class type's hierarchy in the same order as they are defined in the metadata, then </para>
+            </listItem>
+            <listItem>
+              <para>all aspects defined as class attribute on the target class or target class type's hierarchy in the same order as they are defined in the metadata </para>
+            </listItem>
+            <listItem>
+              <para>all aspects defined as interface attribute on an interface implemented by the target class in the same order as they are defined in the metadata </para>
+            </listItem>
+            <listItem>
+              <para>all aspects defined as method attribute on a method defined in the target class in the same order as they are defined in the metadata, and finally </para>
+            </listItem>
+            <listItem>
+              <para>
+                all aspects given in the aspects array parameter of <codeEntityReference qualifyHint="false">M:Loom.Weaver.Create``1(Loom.Aspect[],System.Object[])</codeEntityReference> or <codeEntityReference qualifyHint="false">M:Loom.Weaver.CreateInstance(System.Type,System.Object[],Loom.Aspect[])</codeEntityReference> in the given order.
+              </para>
+            </listItem>
+          </list>
+
+        <para>
+          Starting with the first aspect the target class will be interwoven with the aspect, resulting into an interwoven class. Each of the following aspects will be interwoven with the interwoven class of the previous result. When a target method is already interwoven with an aspect method and an aspect method of a second aspect wants to interweave the same target method, then the interweaving of the second aspect method occurs on the resulting interwoven method of the previous interweaving step.
+        </para>
+        <para>
+          Regarding to the Join-Point Categories of aspect methods this has the following implications:
+        </para>
+          <list class="bullet">
+            <listItem>
+              <para>
+                <codeInline>
+                  Advice.Before
+                </codeInline>: The aspect methods (of this category) of the latest interwoven aspect are called first.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>
+                  Advice.Around
+                </codeInline>: The aspect method of the latest interwoven aspect gains the control of the execution. A call of <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.Context</codeEntityReference>.<codeEntityReference qualifyHint="false">M:Loom.JoinPoints.Context.Invoke(System.Object[])</codeEntityReference> or <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.Context</codeEntityReference>.<codeEntityReference qualifyHint="false">Overload:Loom.JoinPoints.Context.Call</codeEntityReference> will delegate the control either to interwoven aspect methods of previously interwoven aspects or to the target method.
+              </para>
+            </listItem>
+            <listItem>
+              <para>
+                <codeInline>
+                  Advice.AfterXXX
+                </codeInline>: The aspect methods of the first aspect are called first.
+              </para>
+            </listItem>
+          </list>
+        <para>
+          The following figure depicts the control flow:
+        </para>
+        <para>
+          <mediaLinkInline>
+            <image xlink:href="AspectCallOrder" />
+          </mediaLinkInline>
+        </para>
+      </content>
+     </section>
+    <relatedTopics>
+        <codeEntityReference>N:Loom</codeEntityReference>
+    	<codeEntityReference>N:Loom.JoinPoints</codeEntityReference>
+
+      <!-- One or more of the following:
+           - A local link
+           - An external link
+           - A code entity reference
+
+      <link xlink:href="Other Topic's ID"/>
+      <link xlink:href="Other Topic's ID">Link inner text</link>
+
+      <externalLink>
+          <linkText>Link text</linkText>
+          <linkAlternateText>Optional alternate link text</linkAlternateText>
+          <linkUri>URI</linkUri>
+      </externalLink>
+
+      <codeEntityReference>API member ID</codeEntityReference>
+
+      Examples:
+
+      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
+      <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
+
+      <externalLink>
+          <linkText>SHFB on CodePlex</linkText>
+          <linkAlternateText>Go to CodePlex</linkAlternateText>
+          <linkUri>http://shfb.codeplex.com</linkUri>
+      </externalLink>
+
+      <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
+      <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
+      <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
+      -->
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

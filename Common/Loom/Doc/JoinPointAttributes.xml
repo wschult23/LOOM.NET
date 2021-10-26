@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <JoinPointRemarks>
+    <para use="introduction">
+      There are several additional pointcut attributes <see cref="IncludeAttribute">Include</see>, <see cref="IncludeAllAttribute">IncludeAll</see>, <see cref="ExcludeAttribute">Exclude</see>, <see cref="IncludeAnnotatedAttribute">IncludeAnnotated</see>,
+      <see cref="ExcludeAnnotatedAttribute">ExcludeAnnotated</see>, <see cref="IncludeDeclaredOnlyAttribute">IncludeDeclaredOnly</see>, <see cref="IncludeNonInterwovenAttribute">IncludeNonInterwoven</see>, and <see cref="ExcludeNonInterwovenAttribute">ExcludeNonInterwoven</see>.
+      If you don't use any of the pointcut attributes, the simple match mode is used otherwise the advanced mode is used.
+    </para>
+    <para use="introduction">
+      Simple Match Mode:
+      <list type="bullet">
+        <item><description>name of the target method and the aspect method is identical</description></item>
+        <item><description>
+          the return type must match the target method's return type, using <see cref="Advice"/>.<see cref="Advice.Around"/> and <see cref="Advice"/>.<see cref="Advice.AfterThrowing"/>
+        </description></item>
+        <item><description>in all other cases, the return type of the aspect method must be <c>void</c></description>
+    </item>
+        <item><description>parameter types of the target method and the aspect method parameter types are identical</description></item>
+        <item><description>aspect methods join-point parameters are not considered</description></item>
+      </list>
+    </para>
+    <para use="introduction">
+      Advanced Match Mode:
+      <list type="bullet">
+        <item><description>the pointcut attributes control the matching (name of the aspect method is ignored)</description></item>
+        <item><description>
+          the return type must be a generic type, using <see cref="Advice"/>.<see cref="Advice.Around"/> and <see cref="Advice"/>.<see cref="Advice.AfterThrowing"/>
+        </description></item>
+        <item><description>in all other cases, the return type of the aspect method must be <c>void</c></description></item>
+        <item><description>join-point parameters are not considered</description></item>
+        <item><description>an array parameter that allow a variable number of arguments (by using the <c>params</c> keyword) in the aspect method invocation is considered as wildcard for zero or more parameters of the target method</description></item>
+        <item><description>a generic parameter declared in the aspect methods parameter list is considered as a wildcard for one parameter of the target method, it has to fullfill the constraints of the generic type</description></item>
+      </list>
+    </para>
+    <para>
+      The <see cref="JPRetValAttribute">JPRetVal</see> attribute can be used in every aspect method except <see cref="Advice"/>.<see cref="Advice.Around"/> and <see cref="Advice"/>.<see cref="Advice.AfterThrowing"/>.
+      If this attribute is used in the parameter list, the return value of the target method has to match the type of the parameter annotated with the <see cref="JPRetValAttribute">JPRetVal</see> attribute.
+      If it's a generic type, it has to fullfill the constraints of the generic type.
+    </para>
+    <para use="introduction">
+      See <a href="html/a6898c0f-8a16-4ba2-acb9-cbd7f1efafce.htm">Join Point documentation</a> for further details.
+    </para>
+  </JoinPointRemarks>
+  <AspectMethodSeeAlso>
+    <seealso cref="Aspect"/>
+    <seealso cref="AspectAttribute"/>
+    <seealso cref="CallAttribute"/>
+    <seealso cref="AccessAttribute"/>
+    <seealso cref="FinalizeAttribute"/>
+    <seealso cref="DestroyAttribute"/>
+    <seealso cref="IntroduceAttribute"/>
+    <seealso cref="WarningAttribute"/>
+    <seealso cref="ErrorAttribute"/>
+  </AspectMethodSeeAlso>
+  <JoinPointAttributeRemarks>
+    <remarks>
+      <para>You can combine multible pointcut attributes to describe the join-point you want to interweave. If an aspect method is annotated with two
+      or mor pointcut attributes, the weaver evaluates the join-point attributes according to the current <see cref="MatchModeAttribute">match mode</see></para>
+    </remarks>
+    <seealso cref="IncludeAttribute"/>
+    <seealso cref="IncludeAllAttribute"/>
+    <seealso cref="IncludeDeclaredOnlyAttribute"/>
+    <seealso cref="IncludeAnnotatedAttribute"/>
+    <seealso cref="IncludeNonInterwovenAttribute"/>
+    <seealso cref="ExcludeAttribute"/>
+    <seealso cref="ExcludeAnnotatedAttribute"/>
+    <seealso cref="ExcludeNonInterwovenAttribute"/>
+  </JoinPointAttributeRemarks>
+  <WildcardRemarks>
+    <remarks>
+      <para>
+        The <paramref name="methodname"/> argument expects a pattern which could contain wildcards:
+        <list type="table">
+          <listheader>
+            <term>Wildcard character</term>
+            <description>Meaning</description>
+          </listheader>
+          <item>
+            <term>*</term>
+            <description>Zero or more characters in that position.</description>
+          </item>
+          <item>
+            <term>?</term>
+            <description>One character at that position.</description>
+          </item>
+        </list>
+        However, you should consider to use better implementation strategies like <see cref="IncludeAnnotatedAttribute"/> instead of using wildcards.
+        The extensive use of wildcards usually leads into code that is too complicated to be understandable at a glance.
+      </para>
+    </remarks>
+  </WildcardRemarks>
+  <JoinPointParameterExample>
+    <example>
+      This example shows the usage of join-point parameters.
+      <code>
+        public class MyAspect : AspectAttribute
+        {
+          [Call(Advice.Around)]
+          [IncludeAll]
+          public T Test&lt;T&gt;([JPContext] Context ctx, [JPTargetClass] Type target, [JPInterwovenClass] Type interwoven, params object[] args)
+          {
+            Console.WriteLine("intercept call to {0}",target.FullName);
+            Console.WriteLine("The type is defined in:\n{0}" , target.provider.FullName);
+            Console.WriteLine("The interwoven type is defined in:\n{0}", interwoven.provider.FullName);
+            Console.WriteLine("Now calling {0}.", ctx.CurrentMethod); 
+
+            return (T)ctx.Invoke(args);
+          }
+        }
+
+        [MyAspect]
+        public class TargetClass
+        {
+          public virtual void foo()
+          {
+            Console.WriteLine("foo called");
+          }
+
+          public virtual void bar()
+          {
+            Console.WriteLine("bar called");
+          }
+        }
+
+        ...
+
+        TargetClass t = Weaver.Create&lt;TargetClass&gt;();
+        t.foo();
+        t.bar();
+
+        ...
+        // [Output]
+        //intercept call to Test.TargetClass
+        //The type is defined in:
+        //Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        //The interwoven type is defined in:
+        //Loom.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        //Now calling Void foo().
+        //foo called
+        //intercept call to Test.TargetClass
+        //The type is defined in:
+        //Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        //The interwoven type is defined in:
+        //Loom.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        //Now calling Void bar().
+        //bar called
+      </code>
+    </example>
+  </JoinPointParameterExample>
+</doc>

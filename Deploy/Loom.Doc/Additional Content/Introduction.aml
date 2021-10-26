@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="2a41fbaf-b070-4ee6-bcd0-4956ca4c0c93" revisionNumber="1">
+  <developerOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+      <para>
+      	The <legacyItalic>LOOM.NET Project</legacyItalic> aims to provide a comprehensive support for the AOP paradigm in .NET. 
+      	Currently we have two aspect weavers.
+	     <legacyItalic>Rapier-LOOM.NET</legacyItalic> is a dynamic weaver and <legacyItalic>Gripper-LOOM.NET</legacyItalic> is a static weaver.
+      </para>
+      <para>
+	      Realized as a class library, LOOM.NET allows the language-independend definition of
+	      aspect code in the form of standard .NET classes. Both aspect weavers are fully binary compatible.
+	      Aspects written for Rapier-LOOM.NET would work with Gripper-LOOM.NET and vice versa.
+      </para>
+      <para>
+      	If you are new to LOOM.NET, we recommend you to start with a short <link xlink:href="79d09d8d-6005-49d0-9320-b037008c1881">tutorial</link>. 
+      	If you have general questions about the project, go to the <link xlink:href="32914007-1223-4b2b-95aa-61f49f2c6114"/> section.
+       </para>
+      <para>
+        To become familiar with the basic concepts of LOOM.NET, you should read the following sections:
+      </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+            <link xlink:href="9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="0ada0922-f2d1-4714-a209-d7b2e610c8de"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="08648ae0-4178-43bd-8039-e0a39263843d"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="50f1c548-6bf6-4e57-a42e-fbae6a0e9894"/>
+          </para>
+        </listItem>
+        <listItem>
+          <para>
+            <link xlink:href="5fcacb48-4716-4cb6-9c58-6ca5af7afcb7"/>
+          </para>
+        </listItem>
+      </list>
+       <para>
+		    If you like what we do and want to help us to continue doing it please feel free to <externalLink><linkText>donate</linkText><linkUri>Donations.htm</linkUri></externalLink>.
+       </para>
+    </introduction>
+    <!-- <inThisSection>Optional description of content in this section</inThisSection> -->
+    <!-- <reference>Optional reference section</reference> -->
+    <!-- <relatedSections>Optional related sections info</relatedSections> -->
+    <!-- <externalResources>Optional external resources section</externalResources> -->
+    
+    <relatedTopics>
+      <externalLink>
+        <linkText>LOOM.NET Homepage</linkText>
+        <linkUri>http://www.rapier-LOOM.NET</linkUri>
+      </externalLink>
+    </relatedTopics>
+  </developerOrientationDocument>
+</topic>

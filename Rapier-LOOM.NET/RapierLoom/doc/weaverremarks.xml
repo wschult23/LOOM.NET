@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <createremarks>
+    <remarks>
+      <para>
+        If you create an instance of the <i>target class</i> for the first time, the <a href="html/9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060.htm">weaver</a> creates an <i>interwoven type</i> which is the target class interwoven with
+        all aspects. Subsequent calls requesting instances of the same target class will return instances of the same interwoven type. If an aspect does not
+        match a <a href="html/a6898c0f-8a16-4ba2-acb9-cbd7f1efafce.htm">join-point</a> of the target class, the aspect will not be interwoven to
+        the target class. The weaver uses a defined <a href="html/a6898c0f-8a16-4ba2-acb9-cbd7f1efafce.htm">interweaving order</a> to interweave more than one aspect.
+      </para>
+      <para>
+        To prevent ambigous matches having multiple construcors in the targettype class use the <see cref="Loom._T&lt;TYPE&gt;"/> to specify the right constructor.
+      </para>
+      <para>
+        Both overloaded methods <see cref="O:Loom.Weaver.Create"/> and <see cref="O:Loom.Weaver.CreateInstance"/> aren't lock-free. If a thread is creating an interwoven object for the first time, all 
+        concurrent calls to these methods are blocked until the object is created. If you want to avoid this behaviour, 
+        use a <see cref="Loom.IClassFactory{T}">class factory</see> by calling <see cref="O:Loom.Weaver.GetClassFactory"/>.
+        If the first object of a type was created, all subsequent calls for creating objects of the same type will not block anymore.
+      </para>
+      <para>
+        These methods are only available if you use dynamic weaving with <a href="html/9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060.htm">Rapier-LOOM.NET</a>.
+      </para>
+    </remarks>
+    <exception cref="Loom.AspectWeaverException">The aspect weaver was unable to interweave the target class.</exception>
+    <exception cref="Loom.AbstractClassException">The interwoven target class has is still abstract methods.</exception>
+    <exception cref="MethodInvocationException">There is no constructor that matches the specified parameters.</exception>
+    <seealso cref="Aspect"/>
+    <seealso cref="AspectAttribute"/>
+    <seealso cref="Loom._T&lt;TYPE&gt;"/>
+    <seealso cref="O:Loom.Weaver.GetClassFactory"/>
+    <seealso cref="Loom.IClassFactory{T}"/>
+    <seealso cref="O:Loom.Weaver.CreateInstance"/>
+    <seealso cref="O:Loom.Weaver.Create"/>
+  </createremarks>
+</doc>

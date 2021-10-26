@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<loom>
+  <assembly name="Test.Lib">
+    <type name="Test.Lib.A">
+      <apply-aspect type="Test.Aspects.MyAspect, Test.Aspects">
+        <parameter type="int">23</parameter>
+      </apply-aspect>
+    </type>
+  </assembly>
+  <assembly name="mscorlib">
+    <type name="System.Collections.ArrayList">
+      <apply-aspect type="Test.Aspects.TestList, Test.Aspects"/>    
+    </type>
+  </assembly>
+</loom>

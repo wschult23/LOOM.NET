@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5381E4E0-F00B-447F-B3F1-1EB51486FED9}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation Project.shfbproj = Documentation Project.shfbproj
+		Donations.htm = Donations.htm
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Additional Content", "Additional Content", "{56300D0E-9FD5-438F-8394-385E9C7A1470}"
+	ProjectSection(SolutionItems) = preProject
+		Additional Content\08648ae0-4178-43bd-8039-e0a39263843d.aml = Additional Content\08648ae0-4178-43bd-8039-e0a39263843d.aml
+		Additional Content\0ada0922-f2d1-4714-a209-d7b2e610c8de.aml = Additional Content\0ada0922-f2d1-4714-a209-d7b2e610c8de.aml
+		Additional Content\2a41fbaf-b070-4ee6-bcd0-4956ca4c0c93.aml = Additional Content\2a41fbaf-b070-4ee6-bcd0-4956ca4c0c93.aml
+		Additional Content\32914007-1223-4b2b-95aa-61f49f2c6114.aml = Additional Content\32914007-1223-4b2b-95aa-61f49f2c6114.aml
+		Additional Content\50f1c548-6bf6-4e57-a42e-fbae6a0e9894.aml = Additional Content\50f1c548-6bf6-4e57-a42e-fbae6a0e9894.aml
+		Additional Content\5fcacb48-4716-4cb6-9c58-6ca5af7afcb7.aml = Additional Content\5fcacb48-4716-4cb6-9c58-6ca5af7afcb7.aml
+		Additional Content\79d09d8d-6005-49d0-9320-b037008c1881.aml = Additional Content\79d09d8d-6005-49d0-9320-b037008c1881.aml
+		Additional Content\9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060.aml = Additional Content\9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060.aml
+		Additional Content\a6898c0f-8a16-4ba2-acb9-cbd7f1efafce.aml = Additional Content\a6898c0f-8a16-4ba2-acb9-cbd7f1efafce.aml
+		Additional Content\AspectCallOrder.gif = Additional Content\AspectCallOrder.gif
+		Additional Content\aspectinstances.aml = Additional Content\aspectinstances.aml
+		Additional Content\Content Layout.content = Additional Content\Content Layout.content
+		Additional Content\f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33.aml = Additional Content\f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33.aml
+		Additional Content\gripperweaving.gif = Additional Content\gripperweaving.gif
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 1
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs34
+		SccLocalPath0 = .
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56300D0E-9FD5-438F-8394-385E9C7A1470} = {5381E4E0-F00B-447F-B3F1-1EB51486FED9}
+	EndGlobalSection
+EndGlobal

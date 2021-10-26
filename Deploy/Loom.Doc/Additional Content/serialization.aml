@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="08648ae0-4178-43bd-8039-e0a39263843d" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+      <para>
+      	An interwoven object is serializable, if the target and every dynamically interwoven aspect are marked as serializable. 
+      	Dynamically interwoven aspects are all aspects passed as parameter to the <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference> 
+      	and <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.CreateInstance</codeEntityReference> method. 
+      	If you try to serialize an interwoven object and there is a dynamic aspect which is not marked as serializable, then you will 
+      	get a <codeEntityReference qualifyHint="false">T:System.Runtime.Serialization.SerializationException</codeEntityReference>.
+		</para>
+		<para>
+			Statically interwoven aspects (the ones you use like attributes) are not serialized. 
+			After deserializing, such aspects will be instantiated like regular attributes and interwoven to the deserialized object. 
+			There is no need to mark them as serializable.
+		</para>
+    </introduction>
+    <section address="example">
+      <title>Example</title>
+      <content>
+      
+<code language="c#">
+// This aspect will be statically interwoven. It may not be marked as serializable
+public class Aspect1
+{
+	...
+}
+
+// This aspect will be dynamically interwoven and must be marked as serializable
+[Serializable]
+public class Aspect2
+{
+  	...
+}
+
+[Serializable]
+[Aspect1]
+public class Target
+{
+  	...
+}
+
+public void SerializeObject(Stream s)
+{
+	BinaryFormater bf = new BinaryFormater();
+	Target t = Weaver.Create&lt;Target&gt;(new Aspect2());
+	bf.Serialize(s,t);  // interwoven object will be serialized
+}
+</code>
+
+      </content>
+    </section>
+    <relatedTopics>
+        <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference> 
+    	<codeEntityReference qualifyHint="false">Overload:Loom.Weaver.CreateInstance</codeEntityReference>
+    	<codeEntityReference qualifyHint="false">T:System.Runtime.Serialization.SerializationException</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

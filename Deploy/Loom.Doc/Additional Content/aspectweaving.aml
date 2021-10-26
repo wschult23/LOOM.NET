@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="9f1a9dc9-d91b-49fa-8a5b-c2ab8250c060" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>This section gives you an overview about LOOM.NET and its aspect weavers.</para>
+    </summary>
+    <introduction>
+    	<para>
+   		<legacyItalic>Aspect Oriented Programming</legacyItalic> (AOP) is a programming paradigm that allows the separation of cross-cutting concerns.
+    	With AOP you are able modularize code that is usually scattered and/or tangled through your whole implementation in so called aspects. LOOM.NET encapsulates these aspects in <legacyItalic>aspect classes</legacyItalic>.
+   		</para>
+        <mediaLink>
+          <caption>Aspect Weaving in LOOM.NET</caption>
+        	<image xlink:href="weaving" />
+        </mediaLink>
+        <para>
+ 			An <legacyItalic>aspect class</legacyItalic> is a special .NET class with methods
+		    constructors and fields as well. At defined <legacyItalic>join points</legacyItalic> an
+		    aspect class becomes interwoven with a target class. Interweaving,
+		    strictly speaking, means that an <legacyItalic>aspect method</legacyItalic> will be
+		    interwoven with a <legacyItalic>target class method</legacyItalic>. The aspect method itself
+		    contains the aspect code and is defined within the aspect class. It has
+		    a special <legacyItalic>aspect method attribute</legacyItalic> applied.
+		    This aspect method attribute
+		    declares a method in the aspect class as an aspect method. Not
+		    necessarily every method in an aspect class is an aspect method and has
+		    this attribute applied. Methods without this attribute will not be
+		    considered for the weaving process.
+     	</para>
+     	<para>
+			Beside the aspect method attributes, LOOM.NET defines nearly a
+			dozen of <legacyItalic>pointcut attributes</legacyItalic>.
+			These attributes are used to select particular join-points which should
+			become interwoven with the aspect method. Examples
+			for these attributes are <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeAttribute</codeEntityReference>, <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.ExcludeAttribute</codeEntityReference> and <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeAllAttribute</codeEntityReference>.
+		</para>
+		<para>
+			A <legacyItalic>target class</legacyItalic> is a regular .NET class. The one and only
+			restriction is that target class methods (which should become
+			interwoven) either have to be virtual or to be defined via an
+			interface. 
+		</para>
+    </introduction>
+    <section address="rapierloom">
+    	<title>Weaving with Rapier-LOOM.NET</title>
+	  	<content>
+	      	<para> 
+		        Rapier-LOOM.NET is a dynamic aspect weaver. It provides its
+				functionality through the <legacyItalic>RapierLoom.dll</legacyItalic> assembly which has to be linked to your .NET
+				project. 
+	        </para>
+	        <para>
+		        The weaving process will be initiated during runtime with a
+				factory. Instead of using the <codeInline>new</codeInline>
+				operator one uses the weavers factory method <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference> or <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.CreateInstance</codeEntityReference> to produce interwoven
+				objects.
+	        </para>
+        <code language="c#">
+          // aspect class
+          public class MyAspect:AspectAttribute
+          {
+          ...
+          }
+          
+          [MyAspect] // annotation
+          public class A //target class
+          {
+          ...
+          }
+          
+          ...
+          
+          // factory call to interweave class A with aspect MyAspect
+          Weaver.Create&lt;A&gt;()
+        </code>
+        </content>
+    </section>
+        <section address="gripperloom">
+    	<title>Weaving with Gripper-LOOM.NET</title>
+	  	<content>
+	      	<para> 
+		        Gripper-LOOM.NET is a static aspect weaver. Aspect weaving happens during a post-compile step. You can interweave target classes by annotating them with aspect classes on assembly, class, method, or property level. 
+            Gripper-LOOM.NET generates an additional assembly containing the glue code and rewrites the original assembly.
+	        </para>
+        <mediaLink>
+          <caption>Gripper-LOOM.NET Compile Steps</caption>
+          <image xlink:href="gripperweaving" />
+        </mediaLink>
+        <para>
+          In order to interweave your aspectized application you have to do the following steps:
+        </para>
+		    <list class="bullet">
+		      <listItem><para>Compile your application with a regular .NET compiler.</para></listItem>
+		      <listItem><para>call gl.exe with the project output as argument. (There is a environment variable %LOOMBIN% that points to gl.exe)</para></listItem>
+		    </list>
+        <para>
+          The most comfortable way would be to configure a post-build step in your Visual Studio settings:
+        </para>
+        <para>
+          <codeInline>"%LOOMBIN%"\gl "$(TargetPath)"</codeInline>
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <externalLink>
+        <linkText>Aspect Oriented Programming</linkText>
+        <linkUri>http://en.wikipedia.org/wiki/Aspect-oriented_programming</linkUri>
+      </externalLink>
+      	<link xlink:href="0ada0922-f2d1-4714-a209-d7b2e610c8de"/>
+    	<link xlink:href="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce"/>
+    	<codeEntityReference>N:Loom</codeEntityReference>
+    	<codeEntityReference>N:Loom.JoinPoints</codeEntityReference>
+    	<codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference> 
+    	<codeEntityReference qualifyHint="false">Overload:Loom.Weaver.CreateInstance</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

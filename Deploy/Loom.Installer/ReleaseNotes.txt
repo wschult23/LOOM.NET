@@ -1,0 +1,117 @@
+RAPIER LOOM.NET Release Notes
+-----------------------------
+What's new in Version 4.1
+1. Static weaving with Gripper-Loom.Net added
+2. ClassFactories to Rapier-Loom.Net added
+
+What's new in Version 4.0
+1. Full .Net 4.0 support
+2. Source-Code converted to Visual Studio 2010
+3. x64 Bug fixed
+
+
+What's new in version 2.21
+1. Bug fixed: Under certain circumstances the weaver has interwoven interface methods with a wrong aspect
+2. Bug fixed: aspects interwoven with interface methods were referenced twice in a target class
+
+What's new in version 2.2
+
+1. Bug fixed: interweaving order of dynamic aspects is now the same as they occour in the aspect array
+2. [JPInitialize] is now obsolete and replaced by Advice.Initialize
+3. Aspect methods interwoven by aspects annotating target class methods will now be executed on the correct aspect instance
+4. The weaver now allows for interweaving interfaces and interface methods statically 
+5. InstanceCreation attribute annotated on aspect classes and used CreationType enumeration renamed to CreateAspect and Per enumeration
+6. The renamed CreateAspect attribute and Per enumeration are moved to the new namespace Loom.AspectProperties.
+7. New join-point variables allow to pass variables between different aspect instances
+8. Added several new examples. All examples alwo available in VB now.
+9. Completed documentation
+
+
+What's new in version 2.0
+
+1. Renamed aspect method attributes:
+         - [Initialize] to [JPInitialize]
+         - [Destroy] to [Finalize]
+2. Added new InstanceCreation attribute to gain control over the instance weaver's instance creation
+3. Minor bug fixes
+4. Completed documentation
+
+
+What's new in version 2.0 RC 1
+
+1. RapierLoom is now divided into a syntax "loom.dll" and the dynamic weaver assembly "rapierloom.dll" 
+2. Aspect is now an interface. A new base class "AspectAttribute" exist to define aspects for static weaving.
+3. Static weaving is now also allowed on Methods, Properties, and Events.
+4. Loom now uses common AOP terms:
+	- Namespace Loom.ConnectionPoints renamed to Loom.JoinPoints
+	- enumeration Invoke renamed to Advice and Invoke.Instead renamed to Advice.Around
+5. New JoinPoint parameters at the front of the aspect parameter list
+   	- [JPContext] Context ... replaces the old context property 
+	- [JPTarget] object ... the interwoven object
+	- [JPTargetClass] Type ... the target class
+	- [JPRetval] <Type> ... the return value   
+	- ...
+6. Full generic support:
+    - you can declare generic aspect methods
+    - you can interweave bound and unbound generic target methods 
+7. Totally revised matching process
+	- new aspect method attributes:
+          [Access], [Destroy], [Introduce], [Initialize], [Error], [Warning]
+	- new wildcard pattern (using generics and params keyword)
+8. Aspect methods are now allowed to be static
+9. Context.Call is now a generic method   
+10. Syntax of introductions has changed (see documentation for further details)
+11. Object creation (after first time interweaving) is now up to 20 times faster
+12. Calls via aspect context ("Context"-class) are now up to 5 times faster
+13. The aspect context ("Context"-class) has two new methods "ReCall" and "ReCallOn" for dynamic dispatching on overloaded target class methods.
+14. The package contains new examples.
+
+
+
+What's new in version 1.5:
+
+1. Full support of .NET Framework 2.0
+2. Full serialization support of interwoven types
+3. New interweaving attributes added:
+	- IncludeFinalizer 
+	- IncludeIfAnnotated (renamed)
+	- ExcludeIfAnnotated (renamed)
+4. Interweaving of constructors now works as intended (Create-attribute)
+5. Interweaving of Invoke.Instead was improved: in the majority of cases there is no longer a performance penalty when you use Context.Invoke calls
+6. New feature: context tagging added (see Aspect.Context.Tag property)
+7. New Interface: every interwoven type now implements an IAspectInfo interface
+8. New method Context.Call which siplifies method parameter handling in some cases
+9. New method Weaver.GetAspects(Type): retrieves a list of statically assigned aspects to a class
+10.New generic factory method Weaver.Create<T>
+11. Bugfixes:
+    - internal errors after garbage collector runs fixed
+    - ref and out parameters should now be handled correctly in interwoven methods
+    - interweaving of properties does not work if you have used the [IncludeAll] attribute
+    - InvokeAfterReturning: implicit parameter bug fixed if the target method has no parameters
+    - [Create(Invoke.Instead)]: wrong call order if you interweave multiple aspects
+    - System.Char parameters should now be handled correctly in interwoven methods
+    - minor fixes
+
+
+What's new in version 1.2:
+
+1. Namespace was renamed Aspects -> Loom
+2. New interweaving attributes added (new namespace Loom.ConnectionPoint)
+  - Include
+  - Exclude
+  - IncludeAll
+  - DeclaredOnly
+  - IncludeIfAttributeDefined
+  - ExcludeIfAttributeDefined
+  - PreserveType
+3. Call.Alias and Call.DeclaredOnly are now obsolete (see point 2)
+4. The weaver now reports detailed information about the weaving process
+  - new event added: Weaver.WeaverMessages 
+  - new namespace: Loom.WeaverMessages
+5. The new IConnectionPointMatch interface gives the user the ability to control the weaving process programatically
+6. some Bugfixes
+
+
+
+(C) Copyright 2001-2007 by Wolfgang Schult, LOOM.NET Project
+http://www.rapier-loom.net

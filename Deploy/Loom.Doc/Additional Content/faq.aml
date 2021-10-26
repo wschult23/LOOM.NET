@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="32914007-1223-4b2b-95aa-61f49f2c6114" revisionNumber="1">
+  <developerTroubleshootingDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+      <!-- Uncomment this to generate an outline of the section and sub-section
+           titles.  Specify a numeric value as the inner text to limit it to
+           a specific number of sub-topics when creating the outline.  Specify
+           zero (0) to limit it to top-level sections only.  -->
+      <!-- <autoOutline /> -->
+      <para>Required introduction</para>
+    </introduction>
+    <!-- Zero or more sections.  These are collapsible.  If using
+         <autoOutline />, add an address attribute to identify it and specify
+         a title so that it can be jumped to with a hyperlink. -->
+    <section address="generalfaq">
+      <title>General Questions</title>
+      <content>
+        <para><legacyBold>What is AOP?</legacyBold></para>
+        <para>
+        AOP stands for Aspect Oriented Programming. If you're new to the concepts of AOP and AOSD (Aspect Oriented Software Development), you should have
+        a look at our tutorial. A comprehensive source of information about AOP and AOSD in general is the home of the annual aspect-oriented software development
+        conference at <externalLink><linkText>aosd.net</linkText><linkUri>http://www.aosd.net</linkUri></externalLink>.
+     	</para>
+     	<para><legacyBold>What is a Loom?</legacyBold></para>
+        <para>
+        According to a dictionary, a Loom is a weaving machine. Today there are several kinds of looms: dummy shuttle, rapier, gripper and fluid jet.
+		    </para>
+        <para>
+          The rapier type conveys a pick of weft from a stationary package through the shed by means of either a single rapier or a pair of rapiers. Rapiers are either rigid rods or flexible steel tapes, which are straight when in the shed but on withdrawal are wound onto a wheel, in order to save floor space. Rapier looms are, on the whole, simpler and more versatile than dummy-shuttle looms but are slower in weaving speed.
+        </para>
+     	<para><legacyBold>Can I use Rapier-LOOM.NET in commercial/private projects?</legacyBold></para>
+        <para>
+		Yes you can. Please visit our <externalLink><linkText>CodePlex webpage</linkText><linkUri>http://loom.codeplex.com/license</linkUri></externalLink> to learn more about the license conditions. 
+		</para>
+     	<para><legacyBold>Is the source code of Rapier-LOOM.NET available?</legacyBold></para>
+        <para>
+          Yes it is available at <externalLink><linkText>CodePlex</linkText><linkUri>http://loom.codeplex.com/SourceControl/list/changesets</linkUri></externalLink>. 
+		  </para>
+     	<para><legacyBold>How does LOOM.NET compare to AspectJ?</legacyBold></para>
+		
+		<table>
+		  <tableHeader>
+		    <row>
+		      <entry/>
+		      <entry><para>AspectJ</para></entry>
+		      <entry><para>LOOM.NET</para></entry>
+		    </row>
+		  </tableHeader>
+		  <row>
+		    <entry><para>aspect weaver</para></entry>
+		    <entry><para>ajc is a compiler that is used instead of the normal javac</para></entry>
+		    <entry><para>realized as a .NET API</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>aspect definition</para></entry>
+		    <entry>
+				<para><codeInline>aspect MyAspect</codeInline></para>
+				<para><codeInline>{ ... }</codeInline></para>
+		    </entry>
+		    <entry>
+				<para><codeInline>public class MyAspect : AspectAttribute</codeInline></para>
+				<para><codeInline>{ ... }</codeInline></para>
+		    </entry>
+		  </row>
+		  <row>
+		    <entry><para>definition of weaving points</para></entry>
+		    <entry>
+		    <para>happens through "pointcuts" that are described with wildcards:</para>
+				<para><codeInline>pointcut TraceMethod():</codeInline></para>
+				<para><codeInline>execution( * *.TargetClass.* (..)); </codeInline></para>
+		    </entry>
+		    <entry>
+		    <para>is given in form of attributes at the aspect methods and through the signature of the aspect method: </para>
+				<para><codeInline>[Call(Invoke.After), IncludeAll]</codeInline></para>
+				<para><codeInline>public void MyCode(object[]) </codeInline></para>
+		    </entry>
+		  </row>
+		  <row>
+		    <entry><para>assignment of aspects to classes</para></entry>
+		    <entry>
+		    	<para>implicitly through pointcuts: </para>
+				<para><codeInline>pointcut TraceMethod():</codeInline></para>
+				<para><codeInline>execution( * *.TargetClass.* (..)); </codeInline></para>
+		    </entry>
+		    <entry>
+		    	<para>explicitly through class attributes: </para>
+				<para><codeInline>[MyAspect]</codeInline></para>
+				<para><codeInline>public class TargetClass { ... }</codeInline></para>
+		    	<para>or at instantiation time: </para>
+				<para><codeInline>Weaver.Create&lt;TargetClass&gt;(new MyAspect())</codeInline></para>
+		    </entry>
+		  </row>
+		  <row>
+		    <entry><para>definition of aspect code</para></entry>
+		    <entry>
+		    	<para>in advices: </para>
+		    	<para><codeInline>after():TraceMethod()</codeInline></para>
+		    	<para><codeInline>{</codeInline></para>
+		    	<para><codeInline>...</codeInline></para>
+		    	<para><codeInline>}</codeInline></para>
+		    </entry>
+		    <entry>
+		    	<para>in aspect methods: </para>
+		    	<para><codeInline>[Call(Advice.After), IncludeAll]</codeInline></para>
+		    	<para><codeInline>public void MyCode(params object[] args)</codeInline></para>
+		    	<para><codeInline>{</codeInline></para>
+		    	<para><codeInline>...</codeInline></para>
+		    	<para><codeInline>}</codeInline></para>
+		    </entry>
+		  </row>
+		</table>
+     	<para><legacyBold>I found a bug. What can I do?</legacyBold></para>
+      	<para>Please report it via <externalLink><linkText>CodePlex webpage</linkText><linkUri>http://loom.codeplex.com/workitem/list/basic</linkUri></externalLink>.</para>
+      </content>
+    </section>
+    <section address="usagefaq">
+      <title>Usage Questions</title>
+      <content>
+        <para><legacyBold>Why are my aspects not interwoven?</legacyBold></para>
+        <para>
+        In case of using Rapier-LOOM.NET ensure that the object that the object you send messages to is created by the <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference> method of the aspect weaver. Also check that the target method is either called via an interface or marked as virtual, and that the aspect method and the target method match.
+		You can also consume the public <codeEntityReference qualifyHint="false">E:Loom.AspectWeaver.WeaverMessages</codeEntityReference> event to retrieve debug information from the aspect weaver.
+    Furthermore and if you use Gripper-LOOM.NET, you can use the <legacyItalic>Weaving Plan Analyser</legacyItalic> tool. 
+    	</para>
+     	<para><legacyBold>Can I weave with static methods/properties or private implementations?</legacyBold></para>
+        <para>
+        No, this is not possible because this would violate object oriented programming paradigms. The LOOM.NET paradigm is not to "patch" the target code.
+        It is much less error-prone, if the target code and the aspect code fits together and this means that you have to declare explicitly which 
+        methods, properties and constructors are potential targets for aspect code.
+        </para>
+        <para>
+        With LOOM.NET you can implement interfaces and override virtual implementations in a aspect oriented manner which means that you can prevent crosscutting
+        concerns. But in contrast to other aspect oriented solutions LOOM.NET will not harm the module boundaries defined by the programmer of the target code.
+		</para>
+		<para><legacyBold>Can I interweave webservices?</legacyBold></para>
+        <para>
+        Yes you can, but you have to keep in mind that interweaving occours only on the client side. This means that the aspect will be interwoven with the service proxy and the code will be executet in context of the thread that calls the webservice. 
+		</para>
+     	<para><legacyBold> In what languages can I use LOOM.NET?</legacyBold></para>
+        <para>
+        LOOM.NET is realized in a 100% pristine .NET library: That means, you can use it in every language that is .NET compliant and consume .NET libraries.
+		</para>
+     	<para><legacyBold>What is the performance penalty for using Rapier-LOOM.NET?</legacyBold></para>
+        <para>
+        There are two cases where you have a definite performance penalty: When you create a weaved object via <codeInline>Weaver.Create(...)</codeInline>, and when you invoke weaved methods on this object. 
+		During object creation, the Create call might take a hundert times longer than an object creation via new (which is an extremely fast operation.) This is because the weaver has to create an interwoven type at runtime. If you create an object from the same type with the same aspects a second time, the library doesn't have to reweave and the call is significantly faster. 
+		</para>
+		<table>
+		  <tableHeader>
+		    <row>
+		      <entry/>
+		      <entry><para>object creation with new</para></entry>
+		      <entry><para>object creation with Weaver.Create(...) and Advice.Before</para></entry>
+		      <entry><para>object creation with Weaver.Create(...) and Advice.Around</para></entry>
+		    </row>
+		  </tableHeader>
+		  <row>
+		    <entry><para>first call</para></entry>
+		    <entry><para>100%</para></entry>
+		    <entry><para>11000%</para></entry>
+		    <entry><para>15000%</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>2<superscript>nd</superscript>-n<superscript>th</superscript>call</para></entry>
+		    <entry><para>100%</para></entry>
+		    <entry><para>150-200%</para></entry>
+		    <entry><para>150-200%</para></entry>
+		  </row>
+		</table>
+		<para>
+		When it comes to method invocation, the differences are not that big. You should nevertheless note, that doing a call to a private implemented interface method (like <codeInline>IBar.foo() {...}</codeInline>) is a costly operation.
+		</para>
+		<table>
+		  <tableHeader>
+		    <row>
+		      <entry/>
+		      <entry><para>without aspect method</para></entry>
+		      <entry><para>Advice.Before/After</para></entry>
+		      <entry><para>Advice.Around (with Context.Invoke(...))</para></entry>
+		    </row>
+		  </tableHeader>
+		  <row>
+		    <entry><para>virtual method</para></entry>
+		    <entry><para>100%</para></entry>
+		    <entry><para>100-170%</para></entry>
+		    <entry><para>160-180%</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>public interface implementation</para></entry>
+		    <entry><para>100%</para></entry>
+		    <entry><para>100-170%</para></entry>
+		    <entry><para>170-190%</para></entry>
+		  </row>
+		  <row>
+		    <entry><para>private interface implementation</para></entry>
+		    <entry><para>100%</para></entry>
+		    <entry><para>250-300%</para></entry>
+		    <entry><para>250-300%</para></entry>
+		  </row>
+		</table>		
+     	<para><legacyBold>Can I still debug my programs conveniently when using LOOM.NET?</legacyBold></para>
+        <para>
+        You can debug target methods as well as aspect methods: Simply put a breakpoint at the beginning of the method code. To debug the weaving process, you can consume the <codeEntityReference qualifyHint="false">E:Loom.AspectWeaver.WeaverMessages</codeEntityReference> event.
+		</para>
+     	<para><legacyBold>With which .Net frameworks does LOOM.NET work?</legacyBold></para>
+        <para>
+        LOOM.NET was mainly tested with the Microsoft.NET Framework 4.0. But there are also older versions for the Microsoft.NET Framwork Version 2.0 on the 
+        <externalLink>
+          <linkText>CodePlex webpage</linkText>
+          <linkUri>http://www.rapier-LOOM.NET</linkUri>
+        </externalLink>.
+		  </para>
+      </content>
+    </section>
+    <section>
+      <title>Coding questions</title>
+      <content>
+        <para>
+          <legacyBold>How can I obtain the return value of a interwoven method?</legacyBold>
+        </para>
+        <para>
+          You have to access the return value explicitly via the join-point parameter <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPRetVal</codeEntityReference>:
+        </para>
+        <code language="c#">
+          [Call(Advice.After)]
+          public void aspecttestmethod([JPRetVal] ref string s)
+          {
+            s="Hello";
+          }
+        </code>
+        <para>
+          In this case, the parameter <legacyBold>s</legacyBold> will be mapped to the return value. If you want to manipulate the return value, then it has to be a <legacyBold>ref</legacyBold> parameter. You can leave out the <legacyBold>ref</legacyBold> but then changes to <legacyBold>s</legacyBold> would not have an effect.
+        </para>
+        <para>
+          Note, that this aspect method will match only to methods with no parameters that return a <legacyBold>string</legacyBold> value. If you want to interweave methods with one or mor parameters, you have to use the following pattern:
+        </para>
+        <code language="c#">
+          [Call(Advice.After)]
+          public void aspecttestmethod([JPRetVal] ref string s, params object args[])
+          {
+            s="Hello";
+          }
+        </code>
+        <para>
+          But this would match only methods that return a string. If you want to have a generic join-point method, you have to write this:
+        </para>
+        <code language="c#">
+          [Call(Advice.After)]
+          public void aspecttestmethod&lt;T&gt;([JPRetVal] ref T s, params object args[])
+          {
+            s=default(T);
+          }
+         </code>
+        <para>
+          If you want you can define further restrictions i.e. that only methods returning a "Baz" (this would also include derived types) should be interwoven:
+        </para>
+        <code>
+          [Call(Advice.After)]
+          public void aspecttestmethod&lt;T&gt;([JPRetVal] ref T s, params object args[]) where s:Baz
+          {
+            s.MethodOfBaz("Hello");
+          }
+        </code>
+        <para>
+          <legacyBold>How can I assign my aspects to third-party code i. e. to classes from the <codeInline>System</codeInline> namespace?</legacyBold>
+        </para>
+        <para>
+          With Rapier-LOOM.NET you can use the overloaded versions of <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.Create</codeEntityReference>
+          and <codeEntityReference qualifyHint="false">Overload:Loom.Weaver.CreateInstance</codeEntityReference> which take your aspect as parameter. Alternatively 
+          you should derive the third party class an annotate it. This would work for Gripper-LOOM.NET as well:
+        </para>
+        <code>
+          [MyAspect]
+          public class MyAspectizedVersion:ThirdPartyClass {}
+        </code>
+      </content>
+    </section>
+    <relatedTopics>
+      <codeEntityReference qualifyHint="true">N:Loom.WeaverMessages</codeEntityReference>
+    </relatedTopics>
+    </developerTroubleshootingDocument>
+</topic>

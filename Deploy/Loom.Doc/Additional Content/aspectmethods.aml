@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <summary>
+   <para>This section describes what an aspect method is and how they can be interwoven on so called join-points.</para>
+   </summary>
+   <introduction>
+      <para>
+        <legacyItalic>Join-Points</legacyItalic> are points in the control flow of a program. 
+        With LOOM.NET you are able to <legacyItalic>advice</legacyItalic> the programm on the following kinds of join-points:
+      </para>
+      <list class="bullet">
+        <listItem>
+          <para>creation of a target class</para>
+        </listItem>
+        <listItem>
+          <para>calls of target methods</para>
+        </listItem>
+        <listItem>
+          <para>access to properties of the target class</para>
+        </listItem>
+        <listItem>
+          <para>the finalization of the target class object.</para>
+        </listItem>
+      </list>
+      <para>
+      Advice means that an <legacyItalic>aspect method</legacyItalic> will be executed when such
+      a join-point is reached. To do that you have to declare an aspect class containing this aspect method, that 
+      covers the declaring entity (also join-point shadow) of this join-point.
+      </para>
+      <para>
+      	An aspect class is a regular .NET class that is derived from 
+      	<codeEntityReference qualifyHint="false">T:Loom.Aspect</codeEntityReference> or
+      	<codeEntityReference qualifyHint="false">T:Loom.AspectAttribute</codeEntityReference>.
+        A method declared within an aspect class becomes an aspect method, if it is
+        annotated by an aspect method attribute. The following figure shows a 
+        typical aspect method declared within an aspect.
+      </para>
+      <mediaLink>
+          <caption>Declaring an Aspect Method</caption>
+        	<image xlink:href="aspectmethod" />
+        </mediaLink>
+    </introduction>
+	<section address="aspectmethod">
+      <title>Aspect Method Attributes</title>
+      <content>
+        <para>
+          A method inside of an
+          aspect class is marked as aspect method using one
+          of the following aspect method attributes:
+        </para>
+        <table>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>Attribute</para>
+              </entry>
+              <entry>
+                <para>Aspect Method Type</para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+                [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.CreateAttribute</codeEntityReference>(Advice)]
+              </para>
+            </entry>
+            <entry>
+              <para>The aspect method advices a target class construction</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.CallAttribute</codeEntityReference>(Advice)]
+              </para>
+            </entry>
+            <entry>
+              <para>The aspect method advices a method call</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.AccessAttribute</codeEntityReference>(Advice)]
+              </para>
+            </entry>
+            <entry>
+              <para>The aspect method advices a property/event access</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.FinalizeAttribute</codeEntityReference>(Advice)]
+              </para>
+            </entry>
+            <entry>
+              <para>The aspect method advices a target class object finalization</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IntroduceAttribute</codeEntityReference>(Type)]
+              </para>
+            </entry>
+            <entry>
+              <para>The aspect method will be introduced to a target class.</para>
+            </entry>
+          </row>
+        </table>
+        <para>
+          The enumeration <codeEntityReference qualifyHint="true">T:Loom.JoinPoints.Advice</codeEntityReference>
+          is used to define how an aspect method becomes interwoven with a join-point:
+        </para>
+
+        <list class="bullet">
+          <listItem>
+            <para>
+              <codeInline>Advice.Before</codeInline>
+            </para>
+            <para>The aspect method will be executed before the join-point is called</para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeInline>Advice.After</codeInline>
+            </para>
+            <para>The aspect method will be executed after the join-point is called</para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeInline>Advice.Around</codeInline>
+            </para>
+            <para>The join-point will not be executed - but can be called from inside the aspect method.</para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeInline>Advice.AfterReturning</codeInline>
+            </para>
+            <para>The aspect method will be called after the target method returns.</para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeInline>Advice.AfterThrowing</codeInline>
+            </para>
+            <para>The aspect method will be invoked after the join-point has been thrown an exception.</para>
+          </listItem>
+          <listItem>
+            <para>
+              <codeInline>Advice.Initialize</codeInline>
+            </para>
+            <para>Every time an interwoven object of the specified target class is created, the aspect method will be invoked for every matching join-point</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="semantics">
+      <title>The Semantics of an Interwoven Join-Point</title>
+      <content>
+        <para>
+          An interwoven join-point has the following semantic:
+        </para>
+
+        <code language="c#">
+          try
+          {
+          	call all Advice.Before aspect methods
+          	RetVal :=  (execute join-point | call Advice.Around aspect method)
+          	call all Advice.AfterReturning aspect methods
+          }
+          catch(Exception)
+          {
+          	foreach Advice.AfterThrowing aspect methods
+          	{
+	      		RetVal := call aspect method
+          	}
+          }
+          finally
+          {
+          	call all Advice.After aspect methods
+          }
+          return RetVal
+        </code>
+      </content>
+    </section>
+    <section address="interweavingrules">
+      <title>Rules for Interweaving</title>
+      <content>
+        <para>
+          There are several additional pointcut attributes:
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeAttribute</codeEntityReference>],
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeAllAttribute</codeEntityReference>].
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.ExcludeAttribute</codeEntityReference>],
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeAnnotatedAttribute</codeEntityReference>],
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.ExcludeAnnotatedAttribute</codeEntityReference>],
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.IncludeDeclaredOnlyAttribute</codeEntityReference>],
+          [<codeEntityReference qualifyHint="false">T:Loom.JoinPoints.ExcludeNonInterwovenAttribute</codeEntityReference>].
+          If you don't use any of the pointcut attributes, the simple match mode is used otherwise the advanced mode is used.
+        </para>
+        <para>
+          In simple match mode a method becomes interwoven if the following conditions are met:
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>the aspect covers the target</para>
+          </listItem>
+          <listItem>
+            <para>name of the target method and the aspect method is identical</para>
+          </listItem>
+          <listItem>
+            <para>
+              the return type must match the target method's return type, using <codeInline>Advice.Around</codeInline> and <codeInline>Advice.AfterThrowing</codeInline>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              in all other cases, the return type of the aspect method must be <codeInline>void</codeInline>
+            </para>
+          </listItem>
+          <listItem>
+            <para>parameter types of the target method and the aspect method parameter types are identical</para>
+          </listItem>
+          <listItem>
+            <para>aspect methods join-point parameters are not considered</para>
+          </listItem>
+        </list>
+        <para>
+          Example for simple matching:
+        </para>
+        <code language="c#">
+          [MyAspect]
+          public class A
+          {
+            public virtual void foo(int i)
+            {
+            }
+          }
+
+          public class MyAspect : AspectAttribute
+          {
+            [Call(Advice.Before)]
+            public void foo(int i)
+            {
+            }
+          }
+        </code>
+        <para>
+          In the advanced match mode allows for interweaving more than one target method within the same target class:
+        </para>
+        <list class="bullet">
+          <listItem>
+            <para>the aspect covers the target</para>
+          </listItem>
+          <listItem>
+            <para>the pointcut attributes control the matching (name of the aspect method is ignored)</para>
+          </listItem>
+          <listItem>
+            <para>
+              the return type must be a generic type, using <codeInline>Advice.Around</codeInline> and <codeInline>Advice.AfterThrowing</codeInline>
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              in all other cases, the return type of the aspect method must be <codeInline>void</codeInline>
+            </para>
+          </listItem>
+          <listItem>
+            <para>join-point parameters are not considered</para>
+          </listItem>
+          <listItem>
+            <para>
+              an array parameter that allow a variable number of arguments (by using the <codeInline>params</codeInline> keyword) in the aspect method invokation is considered as wildcard for zero or more parameters of the target method
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+            a generic type parameter declared in the aspect methods parameter list is considered as a wildcard for one parameter of the target method. 
+            The target method parameter has to fullfill all declared generic parameter constrains.
+            </para>
+          </listItem>
+        </list>
+        <alert>
+        <para>
+          Special treatment for <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPRetValAttribute</codeEntityReference>:
+          The <codeInline>[JPRetVal]</codeInline>
+          attribute can be used in every aspect method except <codeInline>Advice.Around</codeInline> and
+          <codeInline>Advice.AfterThrowing</codeInline>. If this attribute is used in the parameter list,
+          the return value of the target method has to match the type of the
+          <codeInline>[JPRetVal]</codeInline> attribute type. If it's a generic type, it has to fullfill
+          the constraints of the generic type.
+        </para>
+        </alert>
+        <para>
+            Example for advanced matching:
+          </para>
+          <code language="c#">
+            [MyAspect]
+            public class A
+            {
+              public virtual void foo(int i)
+              {
+              }
+              
+              public virtual int bar(string s, double d)
+              {
+                return 42;
+              }
+            }
+
+            public class MyAspect : AspectAttribute
+            {
+              [Call(Advice.Before)]
+              [IncludeAll]
+              public T MyAdvice&lt;T&gt;(params object[] args)
+              {
+              }
+            }
+          </code>
+      </content>
+    </section>
+    <section address="joinpoinparameters">
+      <title>Join-Point Parameters</title>
+      <content>
+        <para>
+          A join-point parameter is
+          used to retrieve information about the interwoven target class. The
+          number of join-point parameters in an aspect method is not restrichted.
+          All join-point parameters must be declared at the beginning of the
+          aspect method's parameter list. Use the following attributes to declare
+          a join-point parameter:
+        </para>
+        <table>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>Parameter Attribute</para>
+              </entry>
+              <entry>
+                <para>Use this parameter</para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPContextAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>to get the join-point context.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPRetValAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>to get the result of the target method.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPTargetAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>
+                to get an <codeEntityReference qualifyHint="false">T:System.Object</codeEntityReference> representing the instance of the target class.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPTargetClassAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>
+                to get a <codeEntityReference qualifyHint="false">T:System.Type</codeEntityReference> object representing the target class.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPInterwovenClassAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>
+                to get a <codeEntityReference qualifyHint="false">T:System.Type</codeEntityReference> object representing the interwoven class.
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <codeEntityReference qualifyHint="false">T:Loom.JoinPoints.JPVariableAttribute</codeEntityReference>
+              </para>
+            </entry>
+            <entry>
+              <para>to declare a parameter referencing a join-point variable.</para>
+            </entry>
+          </row>
+        </table>
+        <para>
+          Example for joinpoint parameters:
+        </para>
+        <code language="c#">
+          public class MyAspect : AspectAttribute
+          {
+            [Call(Advice.Before)]
+            public void foo([JPTargetClass] Type t, int i)
+            {
+              Console.Writeline("Interwoven with {0}",t.FullName);
+            }
+          }
+        </code>
+      </content>
+    </section>
+    <relatedTopics>
+      <codeEntityReference>N:Loom</codeEntityReference>
+      <codeEntityReference>N:Loom.JoinPoints</codeEntityReference>
+      <link xlink:href="f1dbcfc8-d59f-45e8-a6c8-f6ef799fee33"/>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

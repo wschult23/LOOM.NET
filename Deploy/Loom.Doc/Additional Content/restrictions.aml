@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="50f1c548-6bf6-4e57-a42e-fbae6a0e9894" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>
+There are some restrictions if you interweave methods with reference (ref/out) parameters. The reason is that under certain circumstances reference parameters could not passed directly to the aspect/target method. 
+If there is no <codeInline>Advice.Around</codeInline> method interwoven on the target method, there is no difference between a call to the target method with and without aspects. There is only a difference when an aspect method changes a reference parameter: 
+</para>
+
+<list class="bullet">
+   <listItem><para>If the aspect method uses parameter wildcards then the changes of the parameter become visible after the aspect method returns. </para></listItem>
+   <listItem><para>If the aspect method has the same parameters like the target method then the aspect method operates on the same reference and changes become visible immediately. </para></listItem>
+</list>
+<para>If the target method is interwoven with an <codeInline>Advice.Around</codeInline> aspect method, there are the following cases how the aspect weaver handles reference parameters: </para>
+
+
+<list class="bullet">
+  <listItem><para>If the aspect method contains parameter wildcards, changes of a ref-parameter within the target method (it implies that the aspect method calls  <codeEntityReference qualifyHint="false">M:Loom.JoinPoints.Context.Invoke(System.Object[])</codeEntityReference> or its related methods) and/or the aspect method become visible after the aspect method returns (copy in/copy out behaviour).</para></listItem>
+  <listItem><para>If the aspect method and target method have the same parameters, changes to a ref -parameter within the target method become visible after the aspect method copies all reference parameters (passed to <codeEntityReference qualifyHint="false">M:Loom.JoinPoints.Context.Invoke(System.Object[])</codeEntityReference> or its related methods) programmatically back to the original parameter. In this case you must not use <codeEntityReference qualifyHint="false">Overload:Loom.JoinPoints.Context.Call</codeEntityReference> or its related methods to call the target method because it is impossible to pass ref-parameters via this method. The following example shows how you could implement this case. 
+</para></listItem>
+</list>
+  </introduction>
+    
+    <section address="Example">
+      <title>Example</title>
+      <content>
+      
+<code language="cs">
+[Call(Advice.Around)]
+public void AspectMethod([JPContext]Context ctx, ref int i)
+{
+	object[] args = new object[] { i }; // copy in original parameter
+	ctx.Invoke(args); // call target method
+	i = args[0]; // copy out
+}
+</code>
+      </content>
+    </section>
+    <relatedTopics>
+      <codeEntityReference>Overload:Loom.Joinpoints.Context.Call</codeEntityReference>
+      <codeEntityReference>M:Loom.JoinPoints.Context.Invoke(System.Object[])</codeEntityReference>
+      <link xlink:href="a6898c0f-8a16-4ba2-acb9-cbd7f1efafce"/>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

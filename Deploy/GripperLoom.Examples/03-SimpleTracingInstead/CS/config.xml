@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<loom>
+  <assembly name="SimpleTracingInstead">
+    <type name="SimpleTracingInstead.IMyClass">
+      <apply-aspect type="SimpleTracingInstead.TracingAspect"/>
+    </type>
+  </assembly>
+</loom>

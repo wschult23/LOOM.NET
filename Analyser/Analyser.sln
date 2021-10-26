@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyser", "Analyser.csproj", "{73E7F308-811D-40A9-8AED-3B4A783CA439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loom", "..\Common\Loom\Loom.csproj", "{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loom.JoinPoints", "..\Common\Loom.JoinPoints\Loom.JoinPoints.csproj", "{102F2533-4C6A-457E-AAE2-A4F273642765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loom.Common", "..\Common\Loom.Common\Loom.Common.csproj", "{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs34
+		SccProjectUniqueName0 = ..\\Common\\Loom\\Loom.csproj
+		SccProjectName0 = ../Common/Loom
+		SccLocalPath0 = ..\\Common\\Loom
+		SccProjectUniqueName1 = ..\\Common\\Loom.JoinPoints\\Loom.JoinPoints.csproj
+		SccProjectName1 = ../Common/Loom.JoinPoints
+		SccLocalPath1 = ..\\Common\\Loom.JoinPoints
+		SccProjectUniqueName2 = ..\\Common\\Loom.Common\\Loom.Common.csproj
+		SccProjectName2 = ../Common/Loom.Common
+		SccLocalPath2 = ..\\Common\\Loom.Common
+		SccLocalPath3 = .
+		SccProjectUniqueName4 = Analyser.csproj
+		SccLocalPath4 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73E7F308-811D-40A9-8AED-3B4A783CA439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E7F308-811D-40A9-8AED-3B4A783CA439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E7F308-811D-40A9-8AED-3B4A783CA439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E7F308-811D-40A9-8AED-3B4A783CA439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F99DB5C5-4A57-4DCF-81CE-A9FB9A45C20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102F2533-4C6A-457E-AAE2-A4F273642765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102F2533-4C6A-457E-AAE2-A4F273642765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102F2533-4C6A-457E-AAE2-A4F273642765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102F2533-4C6A-457E-AAE2-A4F273642765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75C07D4-3DA6-49E9-A0E6-5FE4BBA65E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

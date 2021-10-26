@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Loom.JoinPoints.Implementation.GenericBase" Collapsed="true">
+    <Position X="4.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\BaseClasses.cs</FileName>
+      <HashCode>AIACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.JoinPoint" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>IAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAABA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.MethodBaseJoinPoint" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.MethodInfoJoinPoint" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAQAAAAAEAAAgQAAACAAAAAAAAAAAIAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.MethodJoinPoint" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.ConstructorJoinPoint" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>BAAAAAAAAAABAAAEAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.PropertyJoinPoint" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.EventJoinPoint" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.DestroyMethodJoinPoint" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPoint.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.MethodNameMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.CombinedMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.InterfaceMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.TypeMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.AttributeMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.IncludeSimpleMethodMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.AlwaysTrueMatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.IncludeSimpleMatchAll" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.SimpleResultType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAACAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.SimpleGenericResultType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AIACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.SimpleParameter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAEAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.WildcardParameter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAEAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.AspectParameter" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAIAAAAgEAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.RetValAspectParameter" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.GenericRetValAspectParameter" Collapsed="true">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AIAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.GenericWildcardParameter" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Loom.JoinPoints.Implementation.GenericParameter" Collapsed="true">
+    <Position X="3.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Parameters.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Loom.JoinPoints.Implementation.IJoinPointSelector" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Interfaces.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Loom.JoinPoints.Implementation.IJoinPointParameterMatch" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Interfaces.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Loom.JoinPoints.Implementation.IJoinPointReturnTypeMatch" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Interfaces.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Loom.JoinPoints.Implementation.IJoinPointSelectorInternal" Collapsed="true">
+    <Position X="17.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\JoinPointMatching.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Loom.JoinPoints.Implementation.JoinPointSelectorResult" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>JoinPoints\Implementation\Interfaces.cs</FileName>
+      <HashCode>AAAAAgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAIABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

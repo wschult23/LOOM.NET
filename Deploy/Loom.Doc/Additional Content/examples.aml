@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="5fcacb48-4716-4cb6-9c58-6ca5af7afcb7" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+    <introduction>
+     
+      <para>We provided a package of examples in the examples folder. Here's an overview of the included example projects:</para>
+      
+<table>
+  <tableHeader>
+    <row>
+      <entry><para>Project Name</para></entry>
+      <entry><para>Description</para></entry>
+    </row>
+  </tableHeader>
+  <row>
+  	<entry><para>01-SimpleTracingBefore</para></entry>
+	<entry><para>Interweaving a simple tracing aspect with a target class, called every time before the method is called.  </para></entry>
+  </row>
+  <row>
+  	<entry><para>02-SimpleTracingBeforeAndAfter</para></entry>
+	<entry><para>Interweaving a simple tracing aspect with a target class, called every time before and after the method is called.  </para></entry>
+  </row>
+  <row>
+	<entry><para>03-SimplTracingInstead</para></entry>
+ 	<entry><para>Interweaving several tracing aspects with a target class, called instead of the method.  </para></entry>
+ </row>
+  <row>
+ 	<entry><para>04-AfterReturningAndAfterThrowing</para></entry>
+ 	<entry><para>Interweaving aspects with target classes, which are invoked after returning from the method or are used as exception handler for thrown exceptions in the target method.  </para></entry>
+  </row>
+  <row>
+  	<entry><para>05-Authentication</para></entry>
+  	<entry><para>Shows how to annotate target methods with aspect attributes to interweave them with aspects using an authentication example.  </para></entry>
+  </row>
+  <row>
+  	<entry><para>06-SimpleWildcards</para></entry>
+  	<entry><para>Shows how aspect methods use generic type parameters and return types to match multiple target methods.  </para></entry>
+  </row>
+  <row>
+    <entry><para>07-EventPublisher</para></entry>
+    <entry><para>Shows how to use an aspect to expose an event that can be triggered by a target class.  </para></entry>
+  </row>
+  <row>
+	<entry><para>08-Monitoring</para></entry>
+	<entry><para>Shows the usage of the aspect context.  </para></entry>
+  </row>
+  <row>
+	<entry><para>09-CrossAppDomainCallAspect</para></entry>
+	<entry><para>Shows how to perform method calls in other App-Domains, simply by annotating target methods with the specified domain names.  </para></entry>
+  </row>
+  <row>
+	<entry><para>10-EventConsumer</para></entry>
+ 	<entry><para>Shows how to implement an EventConsumer aspect, which stores target methods to become fired using a fire() method.  </para></entry>
+  </row>
+  <row>
+  	<entry><para>11-Singleton</para></entry>
+	<entry><para>The example shows, how to apply the singleton design pattern to target classes.  </para></entry>
+  </row>
+  <row>
+	<entry><para>12-Memoize</para></entry>
+  	<entry><para>Shows how to implement a simple caching mechanism for target methods.  </para></entry>
+  </row>
+  <row>
+	<entry><para>13-Variable</para></entry>
+	<entry><para>Shows how to use join-point variables to pass data between aspects and target classes.  </para></entry>
+  </row>
+  <row>
+	<entry><para>14-Timeout</para></entry>
+	<entry><para>Shows how to implement a timeout aspect to define runtime constraints to methods.  </para></entry>
+  </row>
+  <row>
+	<entry><para>15-Observer</para></entry>
+	<entry><para>Shows how to realize the Observer design pattern.  </para></entry>
+  </row>
+  <row>
+	<entry><para>16-Visitor</para></entry>
+	<entry><para>Shows how to realize the Visitor design pattern.  </para></entry>
+  </row>
+  <row>
+	<entry><para>17-AsyncronousMethods</para></entry>
+	<entry><para>Shows how to implement a asyncronous method call pattern.</para></entry>
+  </row>
+  <row>
+    <entry>
+      <para>18-Voter</para>
+    </entry>
+    <entry>
+      <para>Shows how to realize a voter pattern</para>
+    </entry>
+  </row>
+  <row>
+	<entry><para>19-ContextOrientedProgramming</para></entry>
+	<entry><para>Shows how to implement the <externalLink>
+        <linkText>Context-oriented Programming</linkText>
+        <linkUri>http://www.swa.hpi.uni-potsdam.de/cop/</linkUri>
+      </externalLink> paradigm with LOOM.NET</para></entry>
+  </row>
+</table>
+
+
+    </introduction>
+    
+    <relatedTopics>
+      
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
